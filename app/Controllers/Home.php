@@ -2,10 +2,15 @@
 
 namespace App\Controllers;
 
-class Home extends BaseController
-{
-	public function index()
-	{
-		return view('welcome_message');
+// use App\Models\User;
+
+class Home extends BaseController {
+	protected $halaman = 'dashboard/';
+
+	public function index() {
+		//$user = new User();
+		$data['home'] = 'oke';
+
+		return view($this->halaman . 'index', $data);
 	}
 }
