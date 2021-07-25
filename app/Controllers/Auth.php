@@ -25,67 +25,6 @@ class Auth extends BaseController {
 		return view($this->halaman . 'index', $data);
 	}
 
-	public function register() {
-		if (session()->isLoggedIn) {
-			return redirect()->to(site_url('/home'));
-		}
-		$opd = new OpdModel();
-		$data['opd'] = $opd->findAll();
-		// $data['pengaturan'] = $this->pengaturanModel->first();
-		$data['validation'] = \Config\Services::validation();
-		return view($this->halaman . 'register', $data);
-	}
-
-	public function register_save() {
-		// dd($this->request->getPost());
-		$valid = $this->model->getOwnValidationRules();
-		$foto = $this->request->getFile('foto');
-		$ktp = $this->request->getFile('ktp');
-		$valid['foto'] = 'uploaded[foto]|max_size[foto,4196]';
-		$valid['ktp'] = 'uploaded[ktp]|max_size[ktp,4196]';
-		$valid['ulangi_password'] = 'matches[password]';
-
-		if (!$this->validate($valid)) {
-			return redirect()
-				->to('/auth/register')
-				->withInput();
-		}
-		if ($foto->isValid()) {
-			$foto->move(ROOTPATH . getenv('PUBLIC_PATH') . '/foto');
-			$file_foto = $foto->getName();
-		}
-		if ($ktp->isValid()) {
-			$ktp->move(ROOTPATH . getenv('PUBLIC_PATH') . '/foto');
-			$file_ktp = $ktp->getName();
-		}
-
-		$data = [
-			'users_name' => $this->request->getPost('name'),
-			'users_nama' => $this->request->getPost('nama'),
-			'users_password' => $this->request->getPost('password'),
-			'users_email' => $this->request->getPost('email'),
-			'users_level' => 5,
-			'users_nohp' => $this->request->getPost('nohp'),
-			'users_nik' => $this->request->getPost('nik'),
-			'users_nip' => $this->request->getPost('nip'),
-			'users_pangkat' => $this->request->getPost('pangkat'),
-			'users_jabatan' => $this->request->getPost('jabatan'),
-			'users_opd' => $this->request->getPost('opd'),
-			'users_foto' => $file_foto,
-			'users_aktif' => 0,
-			'users_ktp' => $file_ktp
-		];
-
-		$r = $this->model->save($data);
-		if ($r) {
-			$this->notif('Pendaftaran Berhasil.');
-		} else {
-			// dd($this->model->errors());
-			$this->notif('Pendaftaran Gagal.', 'error');
-		}
-		return redirect()->to(site_url('/auth'));
-	}
-
 	public function check_login() {
 		$rules = [
 			'username' => 'required|min_length[5]',

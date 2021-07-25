@@ -72,7 +72,7 @@
             <li>
                 <a href="<?= base_url('users/profil'); ?>"><i class="material-icons">account_circle</i>Profil</a>
             </li>
-            <?php if (session()->level == 0) : ?>
+            <?php if (session()->level == 1) : ?>
                 <li>
                     <a href="<?= base_url('users'); ?>"><i class="material-icons">manage_accounts</i>Users</a>
                 </li>
