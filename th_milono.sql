@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: mysql
--- Generation Time: Jul 25, 2021 at 12:36 PM
+-- Generation Time: Jul 26, 2021 at 09:16 PM
 -- Server version: 10.5.8-MariaDB-1:10.5.8+maria~focal
 -- PHP Version: 7.4.12
 
@@ -44,6 +44,32 @@ CREATE TABLE `customer` (
 
 INSERT INTO `customer` (`customer_id`, `customer_nama`, `customer_alamat`, `customer_telp`, `customer_user`, `customer_created`, `customer_updated`, `customer_deleted`) VALUES
 (1, 'PT. Pama Persada1', 'Jl. APT Pranoto1', '08565401266611', 1, '2021-07-24 23:31:53', '2021-07-24 23:35:11', NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `keuangan`
+--
+
+CREATE TABLE `keuangan` (
+  `keuangan_id` int(11) NOT NULL,
+  `keuangan_nominal` int(11) NOT NULL,
+  `keuangan_keterangan` varchar(255) NOT NULL,
+  `keuangan_user` int(11) NOT NULL,
+  `keuangan_approved` datetime DEFAULT NULL,
+  `keuangan_approved_by` int(11) DEFAULT NULL,
+  `keuangan_created` datetime DEFAULT NULL,
+  `keuangan_updated` datetime DEFAULT NULL,
+  `keuangan_deleted` datetime DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `keuangan`
+--
+
+INSERT INTO `keuangan` (`keuangan_id`, `keuangan_nominal`, `keuangan_keterangan`, `keuangan_user`, `keuangan_approved`, `keuangan_approved_by`, `keuangan_created`, `keuangan_updated`, `keuangan_deleted`) VALUES
+(1, 20000000, 'hehehe1', 1, NULL, NULL, '2021-07-26 08:13:00', '2021-07-26 08:15:21', NULL),
+(2, 121212, 'tidak jadi', 1, NULL, NULL, '2021-07-26 08:16:01', '2021-07-26 08:16:01', NULL);
 
 -- --------------------------------------------------------
 
@@ -103,7 +129,7 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`users_id`, `users_name`, `users_password`, `users_salt`, `users_level`, `users_nohp`, `users_nama`, `users_foto`, `users_aktif`, `users_lastlogin`, `users_lastip`, `users_created`, `users_updated`, `users_deleted`) VALUES
-(1, 'admin', '$2y$10$C5/IGiJiSuXiLATaXKpbL.IqCpT66RmlbW4tjOGeOISAADNFGlmsW', '#MzLE4rb@0uKSGe27TJy)Qwds', 1, '+6285654012666', 'Edi Wahyu Widodo, S.ST, MT1', '6a5be3e71002b0c54e784da4dc0881cbd99a1238.jpg', 1, '2021-07-24 23:07:17', '172.16.238.1', '2021-03-09 07:52:51', '2021-07-24 23:07:17', NULL),
+(1, 'admin', '$2y$10$C5/IGiJiSuXiLATaXKpbL.IqCpT66RmlbW4tjOGeOISAADNFGlmsW', '#MzLE4rb@0uKSGe27TJy)Qwds', 1, '+6285654012666', 'Edi Wahyu Widodo, S.ST, MT1', '6a5be3e71002b0c54e784da4dc0881cbd99a1238.jpg', 1, '2021-07-26 07:53:19', '172.16.238.1', '2021-03-09 07:52:51', '2021-07-26 07:53:19', NULL),
 (2, 'bidan', '$2y$10$llDJi.O9rrJVHX6qM8HJ.ed0DbWtZZZMeDdLhJIdiVjZx4X0NY306', '', 3, '081297155586', 'Hardianty Amaliah', '6a5be3e71002b0c54e784da4dc0881cbd99a1238_1.jpg', 0, '2021-03-09 20:22:10', '172.16.238.1', '2021-03-09 20:21:57', '2021-03-25 08:06:55', NULL),
 (3, 'kominfo1', '$2y$10$aqOgVCud7OiS6qrvqLQNzO4oQE4LZ0KQBqf2YIgfD2/fpAQOaeFwa', 'jZ(*qw$6g4vd^fNa&~Ey!J5U+', 4, '+6285654012661', 'PT. Pama Persada1', '75b44b0e9c2e5d305fa323c6c51d3476_Generic_6.jpg', 1, NULL, NULL, '2021-07-24 08:08:26', '2021-07-24 08:09:44', '2021-07-24 08:09:44');
 
@@ -116,6 +142,12 @@ INSERT INTO `users` (`users_id`, `users_name`, `users_password`, `users_salt`, `
 --
 ALTER TABLE `customer`
   ADD PRIMARY KEY (`customer_id`);
+
+--
+-- Indexes for table `keuangan`
+--
+ALTER TABLE `keuangan`
+  ADD PRIMARY KEY (`keuangan_id`);
 
 --
 -- Indexes for table `setting`
@@ -139,6 +171,12 @@ ALTER TABLE `users`
 --
 ALTER TABLE `customer`
   MODIFY `customer_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT for table `keuangan`
+--
+ALTER TABLE `keuangan`
+  MODIFY `keuangan_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `users`

@@ -9,63 +9,30 @@
                 <a href="<?= base_url(); ?>"><i class="material-icons-outlined">dashboard</i>Dashboard</a>
             </li>
             <li>
-                <a href="#"><i class="material-icons">inbox</i>Permohonan<i class="material-icons has-sub-menu">add</i></a>
+                <a href="#"><i class="material-icons">inbox</i>Transaksi<i class="material-icons has-sub-menu">add</i></a>
                 <ul class="sub-menu">
                     <li>
-                        <a href="<?= base_url('permohonan/penerbitan'); ?>">Penerbitan</a>
+                        <a href="<?= base_url('transaksi/add'); ?>">Baru</a>
                     </li>
                     <li>
-                        <a href="<?= base_url('permohonan/perpanjangan'); ?>">Pembaruan</a>
-                    </li>
-                    <li>
-                        <a href="<?= base_url('permohonan/pencabutan'); ?>">Pencabutan</a>
+                        <a href="<?= base_url('transaksi'); ?>">List</a>
                     </li>
                 </ul>
             </li>
             <li>
-                <a href="#"><i class="material-icons">folder</i>Petunjuk<i class="material-icons has-sub-menu">add</i></a>
+                <a href="#"><i class="material-icons">attach_money</i>Keuangan<i class="material-icons has-sub-menu">add</i></a>
                 <ul class="sub-menu">
                     <li>
-                        <a href="<?= base_url('petunjuk/penerbitan'); ?>">Penerbitan</a>
+                        <a href="<?= base_url('keuangan/add'); ?>">Baru</a>
                     </li>
                     <li>
-                        <a href="<?= base_url('petunjuk/perpanjangan'); ?>">Pembaruan</a>
+                        <a href="<?= base_url('keuangan'); ?>">List</a>
                     </li>
                     <li>
-                        <a href="<?= base_url('petunjuk/pencabutan'); ?>">Pencabutan</a>
-                    </li>
-                    <li>
-                        <a href="<?= base_url('petunjuk/penggunaan'); ?>">Penggunaan</a>
+                        <a href="<?= base_url('keuangan/approved'); ?>">Approved</a>
                     </li>
                 </ul>
             </li>
-            <li>
-                <a href="<?= base_url('dokumen'); ?>"><i class="material-icons">book</i>Dokumen</a>
-            </li>
-            <li>
-                <a href="<?= base_url('regulasi'); ?>"><i class="material-icons-outlined">book</i>Regulasi</a>
-            </li>
-            <li>
-                <a href="<?= base_url('reporting'); ?>"><i class="material-icons">cloud_queue</i>Reporting</a>
-            </li>
-            <li>
-                <a href="<?= base_url('faq'); ?>"><i class="material-icons">help_outline</i>FAQ</a>
-            </li>
-            <li>
-                <a href="#"><i class="material-icons">link</i>Link<i class="material-icons has-sub-menu">add</i></a>
-                <ul class="sub-menu">
-                    <li>
-                        <a href="https://portal-bsre.bssn.go.id/login" target="_blank">AMS BSrE</a>
-                    </li>
-                    <li>
-                        <a href="https://esign-bsre.bssn.go.id/login" target="_blank">eSign BSrE</a>
-                    </li>
-                    <li>
-                        <a href="https://webmail.beraukab.go.id" target="_blank">Webmail</a>
-                    </li>
-                </ul>
-            </li>
-
             <li class="sidebar-title">
                 Manajemen
             </li>
