@@ -59,68 +59,8 @@
                             </div>
                             <div class="form-row">
                                 <div class="col-md-6 mb-3">
-                                    <label for="validationCustom02">Pangkat</label>
-                                    <input type="text" class="form-control" name="pangkat" placeholder="Pangkat" value="<?= $item->users_pangkat; ?>" required>
-                                    <div class="invalid-feedback">
-                                        Looks good!
-                                    </div>
-                                </div>
-                                <div class="col-md-6 mb-3">
-                                    <label for="validationCustom02">Jabatan</label>
-                                    <input type="text" class="form-control" name="jabatan" placeholder="Jabatan" value="<?= $item->users_jabatan; ?>" required>
-                                    <div class="invalid-feedback">
-                                        Looks good!
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label for="validationCustom01">OPD</label>
-                                <select name="opd" class="form-control custom-select" required>
-                                    <option value="">Pilih OPD</option>
-                                    <?php foreach ($opd as $o) : ?>
-                                        <option value="<?= $o->opd_id; ?>" <?= $item->users_opd == $o->opd_id ? 'selected' : ''; ?>><?= $o->opd_nama; ?></option>
-                                    <?php endforeach; ?>
-                                </select>
-                                <div class="invalid-feedback">
-                                    Looks good!
-                                </div>
-                            </div>
-                            <div class="form-row">
-                                <div class="col-md-6 mb-3">
-                                    <label for="validationCustom02">NIK</label>
-                                    <input type="text" class="form-control" name="nik" placeholder="NIK" value="<?= $item->users_nik; ?>" required>
-                                    <div class="invalid-feedback">
-                                        Looks good!
-                                    </div>
-                                </div>
-                                <div class="col-md-6 mb-3">
-                                    <label for="validationCustom02">NIP</label>
-                                    <input type="text" class="form-control" name="nip" placeholder="NIP" value="<?= $item->users_nip; ?>" required>
-                                    <div class="invalid-feedback">
-                                        Looks good!
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="form-row">
-                                <div class="col-md-6 mb-3">
                                     <label for="validationCustom02">NO HP</label>
                                     <input type="text" class="form-control" name="nohp" placeholder="NO HP" value="<?= $item->users_nohp; ?>" required>
-                                    <div class="invalid-feedback">
-                                        Looks good!
-                                    </div>
-                                </div>
-                                <div class="col-md-6 mb-3">
-                                    <label for="validationCustom02">Email</label>
-                                    <input type="text" class="form-control" name="email" placeholder="Email" value="<?= $item->users_email; ?>" required>
-                                    <div class="invalid-feedback">
-                                        Looks good!
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="form-row">
-                                <div class="col-md-6 mb-3">
-                                    <label for="validationCustom02">KTP</label>
-                                    <input type="file" class="form-control" placeholder="KTP" name="ktp" id="ktp" onchange="previewImg('ktp')">
                                     <div class="invalid-feedback">
                                         Looks good!
                                     </div>
@@ -133,7 +73,6 @@
                                     </div>
                                 </div>
                             </div>
-                            <hr class="mt-3 mb-3" />
                             <div class="form-group">
                                 <label for="validationCustom01">Username</label>
                                 <input type="text" class="form-control" id="validationCustom01" name="name" placeholder="Username" value="<?= $item->users_name; ?>" required>
@@ -167,8 +106,6 @@
                     <div class="card-body text-center">
                         <h5 class="card-title">Foto</h5>
                         <img src="<?= base_url('foto/' . $item->users_foto); ?>" width="300px" alt="" class="img-thumbnail img-preview foto">
-                        <h5 class="card-title mt-5">KTP</h5>
-                        <img src="<?= base_url('foto/' . $item->users_ktp); ?>" alt="" width="300px" class="img-thumbnail img-preview ktp">
                     </div>
                 </div>
             </div>

@@ -59,8 +59,9 @@
                                         <td><?= $u->keuangan_keterangan; ?></td>
                                         <td class="text-right"><?= number_format($u->keuangan_nominal); ?></td>
                                         <td><?= strftime('%d %b %Y %H:%M', strtotime($u->keuangan_created)); ?></td>
-                                        <td><?= $u->keuangan_approved; ?></td>
+                                        <td><?= $u->keuangan_approved != null ? strftime('%d %b %Y %H:%M', strtotime($u->keuangan_approved)) : '-'; ?></td>
                                         <td class="text-center">
+                                            <a href="<?= base_url('keuangan/approve/' . $u->keuangan_id); ?>" class="mr-3 text-info"><i class="fa fa-check"></i></a>
                                             <a href="<?= base_url('keuangan/edit/' . $u->keuangan_id); ?>" class="mr-3 text-info"><i class="fa fa-edit"></i></a>
                                             <a href="<?= base_url('keuangan/delete/' . $u->keuangan_id); ?>" class="text-danger" onclick="return confirm('are you sure?')"><i class="fas fa-trash"></i></a>
                                         </td>

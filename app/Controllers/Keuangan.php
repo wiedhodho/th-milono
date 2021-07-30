@@ -3,6 +3,7 @@
 namespace App\Controllers;
 
 use App\Controllers\BaseController;
+use CodeIgniter\I18n\Time;
 
 use App\Models\Mkeuangan;
 
@@ -17,7 +18,7 @@ class Keuangan extends BaseController {
 	public function index() {
 		$data['title'] = 'List keuangan';
 
-		$data['keuangan'] = $this->model->findAll();
+		$data['keuangan'] = $this->model->orderBy('keuangan_id', 'DESC')->findAll();
 		$data['validation'] = \Config\Services::validation();
 		return view($this->halaman . 'index', $data);
 	}
@@ -77,6 +78,23 @@ class Keuangan extends BaseController {
 			'keuangan_keterangan' => $this->request->getPost('keterangan'),
 			'keuangan_nominal' => $this->request->getPost('nominal'),
 			'keuangan_user' => session()->userid,
+		];
+
+		$r = $this->model->save($data);
+		if ($r) {
+			$this->notif('Data Keuangan Berhasil disimpan.');
+			return redirect()->to('/keuangan');
+		} else {
+			return redirect()->to('/keuangan/edit/' . $id);
+			$this->notif('Data Keuangan Gagal disimpan.', 'error');
+		}
+	}
+
+	public function approve($id) {
+		$data = [
+			'keuangan_id' => $id,
+			'keuangan_approved' => Time::now(),
+			'keuangan_approved_by' => session()->userid,
 		];
 
 		$r = $this->model->save($data);
