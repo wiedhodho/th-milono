@@ -2,14 +2,21 @@
 
 <?= $this->section('css') ?>
 <link href="<?= base_url(); ?>/assets/plugins/DataTables/datatables.min.css" rel="stylesheet">
+<link href="<?= base_url(); ?>/css/jquery-ui.css" rel="stylesheet">
 <?= $this->endSection() ?>
 
 <?= $this->section('js') ?>
 <script src="<?= base_url(); ?>/assets/plugins/DataTables/datatables.min.js"></script>
+<script src="<?= base_url(); ?>/js/jquery-ui.js"></script>
 <script>
     $(document).ready(function() {
-        "use strict";
         $('#zero-conf').DataTable();
+        $('#tgl2').datepicker({
+            dateFormat: 'yy-mm-dd',
+            onSelect: function(d, i) {
+                $('#form_lihat').submit();
+            }
+        });
     })
 </script>
 <?= $this->endSection() ?>
@@ -40,6 +47,17 @@
                                 <?= session()->getFlashdata('pesan') ?>
                             </div>
                         <?php endif; ?>
+                        <form method="post" action="" id="form_lihat">
+                            <div class="form-row">
+                                <div class="col-md-3 col-sm-6 col-12 mb-3">
+                                    <label for="validationCustom02">Tanggal</label>
+                                    <input type="text" class="form-control" name="tgl2" id="tgl2" placeholder="yy-mm-dd" autocomplete="off" value="<?= $now ?>">
+                                    <div class="invalid-feedback">
+                                        Looks good!
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
                         <table id="zero-conf" class="display" style="width:100%">
                             <thead>
                                 <tr>

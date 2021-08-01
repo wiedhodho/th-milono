@@ -17,8 +17,28 @@ class Keuangan extends BaseController {
 
 	public function index() {
 		$data['title'] = 'List keuangan';
+		$this->model->orderBy('keuangan_id', 'DESC');
+		if ($this->request->getPost('tgl2')) {
+			$data['now'] = $this->request->getPost('tgl2');
+		} else {
+			$data['now'] = date('Y-m-d');
+		}
+		$this->model->like('keuangan_created', $data['now'], 'after');
+		$data['keuangan'] = $this->model->findAll();
+		$data['validation'] = \Config\Services::validation();
+		return view($this->halaman . 'index', $data);
+	}
 
-		$data['keuangan'] = $this->model->orderBy('keuangan_id', 'DESC')->findAll();
+	public function approved() {
+		$data['title'] = 'List Keuangan Approved';
+		$this->model->orderBy('keuangan_id', 'DESC');
+		if ($this->request->getPost('tgl2')) {
+			$data['now'] = $this->request->getPost('tgl2');
+		} else {
+			$data['now'] = date('Y-m-d');
+		}
+		$this->model->like('keuangan_created', $data['now'], 'after');
+		$data['keuangan'] = $this->model->where('keuangan_approved!=', null)->findAll();
 		$data['validation'] = \Config\Services::validation();
 		return view($this->halaman . 'index', $data);
 	}

@@ -12,7 +12,7 @@
                 <a href="#"><i class="material-icons">inbox</i>Transaksi<i class="material-icons has-sub-menu">add</i></a>
                 <ul class="sub-menu">
                     <li>
-                        <a href="<?= base_url('transaksi/add'); ?>">Baru</a>
+                        <a href="<?= base_url('transaksi/add'); ?>">Tambah</a>
                     </li>
                     <li>
                         <a href="<?= base_url('transaksi'); ?>">List</a>
@@ -23,7 +23,7 @@
                 <a href="#"><i class="material-icons">attach_money</i>Keuangan<i class="material-icons has-sub-menu">add</i></a>
                 <ul class="sub-menu">
                     <li>
-                        <a href="<?= base_url('keuangan/add'); ?>">Baru</a>
+                        <a href="<?= base_url('keuangan/add'); ?>">Tambah</a>
                     </li>
                     <li>
                         <a href="<?= base_url('keuangan'); ?>">List</a>
