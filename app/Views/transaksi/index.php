@@ -43,10 +43,10 @@
                         <table id="zero-conf" class="display" style="width:100%">
                             <thead>
                                 <tr>
-                                    <th>No</th>
+                                    <th width="5%">No</th>
                                     <th>Nama Customer</th>
-                                    <th>Tgl Input</th>
-                                    <th>Nama Barang</th>
+                                    <th>Last Update</th>
+                                    <th>Pekerjaan</th>
                                     <th>Status</th>
                                     <th>Action</th>
                                 </tr>
@@ -57,10 +57,11 @@
                                     <tr>
                                         <td><?= $nomor++; ?></td>
                                         <td><?= $u->customer_nama; ?></td>
-                                        <td><?= strftime('%d %b %Y %H:%M', strtotime($u->transaksi_created)); ?></td>
-                                        <td><?= $u->barang_nama; ?></td>
-                                        <td><?= $u->transaksi_status; ?></td>
+                                        <td><?= strftime('%d %b %Y %H:%M', strtotime($u->transaksi_updated)); ?></td>
+                                        <td><?= $u->barang_pekerjaan; ?></td>
+                                        <td><span class="badge badge-pill badge-<?= $status[$u->transaksi_status]['warna'] ?>"><?= $status[$u->transaksi_status]['label'] ?></span></td>
                                         <td class="text-center">
+                                            <a href="<?= base_url('transaksi/proses/' . $u->transaksi_id); ?>" class="mr-3 text-success"><i class="fa fa-check"></i></a>
                                             <a href="<?= base_url('transaksi/edit/' . $u->transaksi_id); ?>" class="mr-3 text-info"><i class="fa fa-edit"></i></a>
                                             <a href="<?= base_url('transaksi/delete/' . $u->transaksi_id); ?>" class="text-danger" onclick="return confirm('are you sure?')"><i class="fas fa-trash"></i></a>
                                         </td>

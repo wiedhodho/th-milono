@@ -15,14 +15,12 @@ class Definisi {
 
 	public function status() {
 		$data = [
-			0 => ['label' => 'Draft', 'warna' => 'secondary'],
-			1 => ['label' => 'Pengajuan', 'warna' => 'info'],
-			2 => ['label' => 'Diproses 1 of 3', 'warna' => 'warning'], //kadis
-			3 => ['label' => 'Diproses 2 of 3', 'warna' => 'warning'], //kabid
-			4 => ['label' => 'Diproses 3 of 3', 'warna' => 'warning'], //kasi
-			5 => ['label' => 'Diusulkan ke BSRe', 'warna' => 'primary'], // verif
-			6 => ['label' => 'Disetujui', 'warna' => 'primary'], // verif
-			7 => ['label' => 'Ditolak', 'warna' => 'danger'], //verif
+			-1 => ['label' => 'Batal', 'warna' => 'danger'],
+			0 => ['label' => 'Barang Masuk', 'warna' => 'secondary'],
+			1 => ['label' => 'Dikerjakan', 'warna' => 'danger'],
+			2 => ['label' => 'Selesai', 'warna' => 'warning'],
+			3 => ['label' => 'Diambil', 'warna' => 'primary'],
+			4 => ['label' => 'Dibayar', 'warna' => 'info'],
 		];
 		return $data;
 	}

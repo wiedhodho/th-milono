@@ -12,7 +12,10 @@ class Mbarang extends Model {
 	protected $useSoftDeletes = true;
 
 	protected $allowedFields = [
+		'barang_transaksi',
 		'barang_nama',
+		'barang_pekerjaan',
+		'barang_harga',
 		'barang_qty'
 	];
 

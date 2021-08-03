@@ -12,10 +12,25 @@
                 <a href="#"><i class="material-icons">inbox</i>Transaksi<i class="material-icons has-sub-menu">add</i></a>
                 <ul class="sub-menu">
                     <li>
-                        <a href="<?= base_url('transaksi/add'); ?>">Tambah</a>
+                        <a href="<?= base_url('transaksi/masuk'); ?>">Barang Masuk</a>
                     </li>
                     <li>
-                        <a href="<?= base_url('transaksi'); ?>">List</a>
+                        <a href="<?= base_url('transaksi/dikerjakan'); ?>">Dikerjakan</a>
+                    </li>
+                    <li>
+                        <a href="<?= base_url('transaksi/selesai'); ?>">Selesai</a>
+                    </li>
+                    <li>
+                        <a href="<?= base_url('transaksi/diambil'); ?>">Diambil</a>
+                    </li>
+                    <li>
+                        <a href="<?= base_url('transaksi/dibayar'); ?>">Dibayar</a>
+                    </li>
+                    <li>
+                        <a href="<?= base_url('transaksi/batal'); ?>">Batal</a>
+                    </li>
+                    <li>
+                        <a href="<?= base_url('transaksi'); ?>">List All</a>
                     </li>
                 </ul>
             </li>
