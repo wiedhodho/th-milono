@@ -33,7 +33,7 @@
             <div class="col">
                 <div class="card">
                     <div class="card-body">
-                        <h5 class="card-title">List Transaksi</h5>
+                        <h5 class="card-title"><?= $title ?></h5>
                         <p>Berikut adalah daftar seluruh transaksi yang ada pada system ini.</p>
                         <?php if (session()->getFlashdata('tipe')) : ?>
                             <div class="alert alert-<?= session()->getFlashdata('tipe') ?> outline-alert" role="alert">
@@ -61,9 +61,8 @@
                                         <td><?= $u->barang_pekerjaan; ?></td>
                                         <td><span class="badge badge-pill badge-<?= $status[$u->transaksi_status]['warna'] ?>"><?= $status[$u->transaksi_status]['label'] ?></span></td>
                                         <td class="text-center">
-                                            <a href="<?= base_url('transaksi/proses/' . $u->transaksi_id); ?>" class="mr-3 text-success"><i class="fa fa-check"></i></a>
+                                            <a href="<?= base_url('transaksi/proses/' . $u->transaksi_status . '/' . $u->transaksi_id); ?>" class="mr-3 text-success"><i class="fa fa-check"></i></a>
                                             <a href="<?= base_url('transaksi/edit/' . $u->transaksi_id); ?>" class="mr-3 text-info"><i class="fa fa-edit"></i></a>
-                                            <a href="<?= base_url('transaksi/delete/' . $u->transaksi_id); ?>" class="text-danger" onclick="return confirm('are you sure?')"><i class="fas fa-trash"></i></a>
                                         </td>
                                     </tr>
                                 <?php endforeach; ?>

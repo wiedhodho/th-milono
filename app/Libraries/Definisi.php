@@ -15,12 +15,12 @@ class Definisi {
 
 	public function status() {
 		$data = [
-			-1 => ['label' => 'Batal', 'warna' => 'danger'],
-			0 => ['label' => 'Barang Masuk', 'warna' => 'secondary'],
-			1 => ['label' => 'Dikerjakan', 'warna' => 'danger'],
-			2 => ['label' => 'Selesai', 'warna' => 'warning'],
-			3 => ['label' => 'Diambil', 'warna' => 'primary'],
-			4 => ['label' => 'Dibayar', 'warna' => 'info'],
+			0 => ['label' => 'Batal', 'warna' => 'danger'],
+			1 => ['label' => 'Barang Masuk', 'warna' => 'secondary'],
+			2 => ['label' => 'Dikerjakan', 'warna' => 'danger'],
+			3 => ['label' => 'Selesai', 'warna' => 'warning'],
+			4 => ['label' => 'Diambil', 'warna' => 'primary'],
+			5 => ['label' => 'Dibayar', 'warna' => 'info'],
 		];
 		return $data;
 	}

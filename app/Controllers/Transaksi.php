@@ -20,7 +20,7 @@ class Transaksi extends BaseController {
 	}
 
 	public function index() {
-		$data['title'] = 'List transaksi';
+		$data['title'] = 'List Semua Transaksi';
 		$def = new Definisi();
 		$data['status'] = $def->status();
 		$data['transaksi'] = $this->model
@@ -30,6 +30,36 @@ class Transaksi extends BaseController {
 			->findAll();
 		$data['validation'] = \Config\Services::validation();
 		return view($this->halaman . 'index', $data);
+	}
+
+	public function status($id) {
+		$def = new Definisi();
+		$data['status'] = $def->status();
+		$status = $data['status'][$id]['label'];
+		$data['title'] = 'List Transaksi ' . $status;
+
+		$def = new Definisi();
+		$data['status'] = $def->status();
+		$data['transaksi'] = $this->model
+			->select('transaksi_id,customer_nama, transaksi_updated, transaksi_status, (SELECT barang_pekerjaan FROM barang WHERE barang_transaksi=transaksi_id LIMIT 1) as barang_pekerjaan')
+			->join('customer', 'transaksi_customer=customer_id')
+			->where('transaksi_status', $id)
+			->orderBy('transaksi_updated', 'desc')
+			->findAll();
+		$data['validation'] = \Config\Services::validation();
+		return view($this->halaman . 'index', $data);
+	}
+
+	public function proses($tahap, $id) {
+		$hist = new Mhistory();
+		$hist->save([
+			'history_transaksi' => $id,
+			'history_user' => session()->userid,
+			'history_status' => $tahap + 1,
+		]);
+		$this->model->set('transaksi_status', $tahap + 1);
+		$this->model->update($id);
+		return redirect()->to($this->request->getUserAgent()->getReferrer());
 	}
 
 	public function add() {
@@ -119,16 +149,5 @@ class Transaksi extends BaseController {
 			return redirect()->to('/transaksi/edit/' . $id);
 			$this->notif('Data transaksi Gagal disimpan.', 'error');
 		}
-	}
-
-	public function delete($id) {
-		$r = $this->model->delete($id);
-
-		if ($r) {
-			$this->notif('transaksi Berhasil dihapus.');
-		} else {
-			$this->notif('transaksi Gagal dihapus.', 'error');
-		}
-		return redirect()->to('/transaksi');
 	}
 }
