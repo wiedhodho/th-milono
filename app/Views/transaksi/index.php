@@ -9,7 +9,56 @@
 <script>
     $(document).ready(function() {
         "use strict";
-        $('#zero-conf').DataTable();
+        let status = JSON.parse(JSON.stringify(<?= $status ?>));
+        let level = <?= session()->level ?>
+
+        $('#zero-conf').DataTable({
+            ordering: true,
+            processing: true,
+            serverSide: true,
+            ajax: {
+                url: "<?= base_url('transaksi/data/' . $tahap); ?>",
+                type: "GET",
+            },
+            columns: [{
+                    data: "transaksi_id"
+                },
+                {
+                    data: "customer_nama"
+                },
+                {
+                    data: "transaksi_updated"
+                },
+                {
+                    data: "barang_pekerjaan"
+                },
+                {
+                    data: "transaksi_status"
+                },
+                {
+                    data: "transaksi_id"
+                }
+            ],
+            columnDefs: [{
+                targets: 4,
+                className: "text-center",
+                render: function(data, type, row, meta) {
+                    return `<span class="badge badge-pill badge-${status[data].warna}">${status[data].label}</span>`;
+                },
+            }, {
+                targets: 5,
+                className: "text-center",
+                render: function(data, type, row, meta) {
+                    var a = `<a href="<?= base_url('transaksi/proses') ?>/${row.transaksi_status}/${data}"><i class="fas fa-check text-success font-16 mr-3"></i></a>`;
+                    if (row.transaksi_status == 1 && level < 4) {
+                        a += `<a href="<?= base_url('transaksi/edit') ?>/${data}"><i class="fas fa-edit text-info font-16 mr-3"></i></a>`;
+                        a += `<a href="<?= base_url('transaksi/proses') ?>/-1/${data}" onclick="return confirm('are you sure ? ')"><i class="fas fa-times text-danger font-16"></i></a>`;
+                    }
+
+                    return a;
+                },
+            }, ]
+        });
     })
 </script>
 <?= $this->endSection() ?>
@@ -52,20 +101,7 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <?php $nomor = 1;
-                                foreach ($transaksi as $u) : ?>
-                                    <tr>
-                                        <td><?= $nomor++; ?></td>
-                                        <td><?= $u->customer_nama; ?></td>
-                                        <td><?= strftime('%d %b %Y %H:%M', strtotime($u->transaksi_updated)); ?></td>
-                                        <td><?= $u->barang_pekerjaan; ?></td>
-                                        <td><span class="badge badge-pill badge-<?= $status[$u->transaksi_status]['warna'] ?>"><?= $status[$u->transaksi_status]['label'] ?></span></td>
-                                        <td class="text-center">
-                                            <a href="<?= base_url('transaksi/proses/' . $u->transaksi_status . '/' . $u->transaksi_id); ?>" class="mr-3 text-success"><i class="fa fa-check"></i></a>
-                                            <a href="<?= base_url('transaksi/edit/' . $u->transaksi_id); ?>" class="mr-3 text-info"><i class="fa fa-edit"></i></a>
-                                        </td>
-                                    </tr>
-                                <?php endforeach; ?>
+
                             </tbody>
                         </table>
                     </div>

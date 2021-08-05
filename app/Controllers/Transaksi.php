@@ -2,6 +2,8 @@
 
 namespace App\Controllers;
 
+use CodeIgniter\API\ResponseTrait;
+
 use App\Controllers\BaseController;
 
 use App\Models\Mtransaksi;
@@ -12,6 +14,7 @@ use App\Models\Mhistory;
 use App\Libraries\Definisi;
 
 class Transaksi extends BaseController {
+	use ResponseTrait;
 	protected $halaman = 'transaksi/';
 	protected $model;
 
@@ -22,30 +25,39 @@ class Transaksi extends BaseController {
 	public function index() {
 		$data['title'] = 'List Semua Transaksi';
 		$def = new Definisi();
-		$data['status'] = $def->status();
-		$data['transaksi'] = $this->model
-			->select('transaksi_id,customer_nama, transaksi_updated, transaksi_status, (SELECT barang_pekerjaan FROM barang WHERE barang_transaksi=transaksi_id LIMIT 1) as barang_pekerjaan')
-			->join('customer', 'transaksi_customer=customer_id')
-			->orderBy('transaksi_updated', 'desc')
-			->findAll();
+		$data['status'] = json_encode($def->status());
+		$data['tahap'] = '';
+		// $data['transaksi'] = $this->model
+		// 	->select('transaksi_id,customer_nama, transaksi_updated, transaksi_status, (SELECT barang_pekerjaan FROM barang WHERE barang_transaksi=transaksi_id LIMIT 1) as barang_pekerjaan')
+		// 	->join('customer', 'transaksi_customer=customer_id')
+		// 	->orderBy('transaksi_updated', 'desc')
+		// 	->findAll();
+
 		$data['validation'] = \Config\Services::validation();
 		return view($this->halaman . 'index', $data);
+	}
+
+	public function data($tahap = '') {
+		if ($tahap == '')
+			$data['data'] = $this->model->datatables();
+		else
+			$data['data'] = $this->model->datatables(['transaksi_status'], [$tahap]);
+		$data['recordsTotal'] = $this->model->count_all();
+		$data['recordsFiltered'] = $this->model->count_filtered();
+
+		$data['draw'] = $this->request->getGet('draw');
+		return $this->respond($data);
 	}
 
 	public function status($id) {
 		$def = new Definisi();
 		$data['status'] = $def->status();
 		$status = $data['status'][$id]['label'];
+		$data['status'] = json_encode($def->status());
 		$data['title'] = 'List Transaksi ' . $status;
+		$data['tahap'] = $id;
 
-		$def = new Definisi();
-		$data['status'] = $def->status();
-		$data['transaksi'] = $this->model
-			->select('transaksi_id,customer_nama, transaksi_updated, transaksi_status, (SELECT barang_pekerjaan FROM barang WHERE barang_transaksi=transaksi_id LIMIT 1) as barang_pekerjaan')
-			->join('customer', 'transaksi_customer=customer_id')
-			->where('transaksi_status', $id)
-			->orderBy('transaksi_updated', 'desc')
-			->findAll();
+
 		$data['validation'] = \Config\Services::validation();
 		return view($this->halaman . 'index', $data);
 	}
@@ -116,10 +128,17 @@ class Transaksi extends BaseController {
 	}
 
 	public function edit($id) {
-		$data['title'] = 'Edit transaksi';
+		$data['title'] = 'Edit Transaksi';
 
 		$data['validation'] = \Config\Services::validation();
 		$data['item'] = $this->model->find($id);
+
+		$barang = new Mbarang();
+		$cust = new Mcustomer();
+		$satuan = new Msatuan();
+		$data['barang'] = $barang->where('barang_transaksi', $id)->findAll();
+		$data['customer'] = $cust->orderBy('customer_nama')->findAll();
+		$data['satuan'] = $satuan->orderBy('satuan_nama')->findAll();
 		return view($this->halaman . 'edit', $data);
 	}
 
