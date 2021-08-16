@@ -63,20 +63,26 @@
                                 <tr>
                                     <th>No</th>
                                     <th>Keterangan</th>
-                                    <th class="text-right">Nominal</th>
                                     <th>Tgl</th>
+                                    <th class="text-right">Debet</th>
+                                    <th class="text-right">Kredit</th>
                                     <th>Status</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <?php $nomor = 1;
-                                foreach ($keuangan as $u) : ?>
+                                $total_kredit = 0;
+                                $total_debet = 0;
+                                foreach ($keuangan as $u) :
+                                    $u->keuangan_dk == 'D' ? $total_debet += $u->keuangan_nominal : $total_kredit += $u->keuangan_nominal;
+                                ?>
                                     <tr>
                                         <td><?= $nomor++; ?></td>
                                         <td><?= $u->keuangan_keterangan; ?></td>
-                                        <td class="text-right"><?= number_format($u->keuangan_nominal); ?></td>
                                         <td><?= strftime('%d %b %Y %H:%M', strtotime($u->keuangan_created)); ?></td>
+                                        <td class="text-right"><?php if ($u->keuangan_dk == 'D') echo number_format($u->keuangan_nominal); ?></td>
+                                        <td class="text-right"><?php if ($u->keuangan_dk == 'K') echo number_format($u->keuangan_nominal); ?></td>
                                         <td><?= $u->keuangan_approved != null ? strftime('%d %b %Y %H:%M', strtotime($u->keuangan_approved)) : '-'; ?></td>
                                         <td class="text-center">
                                             <a href="<?= base_url('keuangan/approve/' . $u->keuangan_id); ?>" class="mr-3 text-info"><i class="fa fa-check"></i></a>
@@ -87,6 +93,9 @@
                                 <?php endforeach; ?>
                             </tbody>
                         </table>
+                        <h5 class="card-title mt-5">Total Debet : <?= number_format($total_debet) ?></h5>
+                        <h5 class="card-title mt-2">Total Kredit : <?= number_format($total_kredit) ?></h5>
+                        <h5 class="card-title mt-2">Total (Kredit-Debet) : <?= number_format($total_kredit - $total_debet) ?></h5>
                     </div>
                 </div>
             </div>

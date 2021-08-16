@@ -44,6 +44,23 @@
                                     </div>
                                 </div>
                             </div>
+                            <div class="form-row">
+                                <div class="col-md-6 mb-3">
+                                    <label for="validationCustom01">Debet / Kredit</label>
+                                    <div class="custom-control custom-radio">
+                                        <input class="custom-control-input" type="radio" name="dk" id="exampleRadios1" value="D" <?= old('dk') == 'D' ? 'checked' : ''; ?> required>
+                                        <label class="custom-control-label" for="exampleRadios1">
+                                            Debet
+                                        </label>
+                                    </div>
+                                    <div class="custom-control custom-radio">
+                                        <input class="custom-control-input" type="radio" name="dk" id="exampleRadios2" value="K" <?= old('dk') == 'K' ? 'checked' : ''; ?> required>
+                                        <label class="custom-control-label" for="exampleRadios2">
+                                            Kredit
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
                             <button class="btn btn-secondary" type="reset">Reset</button>
                             <button class="btn btn-primary" type="submit">Simpan</button>
                         </form>

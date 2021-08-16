@@ -12,6 +12,7 @@ class Mkeuangan extends Model {
 	protected $useSoftDeletes = true;
 
 	protected $allowedFields = [
+		'keuangan_dk',
 		'keuangan_nominal',
 		'keuangan_keterangan',
 		'keuangan_user',
@@ -25,6 +26,7 @@ class Mkeuangan extends Model {
 	protected $deletedField = 'keuangan_deleted';
 
 	protected $validationRules = [
+		'keuangan_dk' => 'required',
 		'keuangan_nominal' => 'required|decimal',
 		'keuangan_keterangan' => 'required|min_length[5]',
 	];
