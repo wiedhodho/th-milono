@@ -93,7 +93,8 @@ class Transaksi extends BaseController {
 				'barang_nama' => $d['nama'],
 				'barang_pekerjaan' => $d['pekerjaan'],
 				'barang_qty' => $d['qty'],
-				'barang_harga' => $d['harga']
+				'barang_harga' => $d['harga'],
+				'barang_satuan' => $d['satuan']
 			);
 			$total += $d['harga'];
 		}

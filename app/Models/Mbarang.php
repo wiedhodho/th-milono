@@ -16,7 +16,8 @@ class Mbarang extends Model {
 		'barang_nama',
 		'barang_pekerjaan',
 		'barang_harga',
-		'barang_qty'
+		'barang_qty',
+		'barang_satuan',
 	];
 
 	protected $useTimestamps = true;

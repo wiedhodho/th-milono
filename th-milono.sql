@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: mysql
--- Generation Time: Aug 16, 2021 at 04:31 PM
+-- Generation Time: Aug 19, 2021 at 03:26 PM
 -- Server version: 10.5.8-MariaDB-1:10.5.8+maria~focal
 -- PHP Version: 7.4.13
 
@@ -33,6 +33,7 @@ CREATE TABLE `barang` (
   `barang_nama` varchar(255) NOT NULL,
   `barang_pekerjaan` varchar(255) NOT NULL,
   `barang_qty` int(11) NOT NULL,
+  `barang_satuan` tinyint(4) NOT NULL,
   `barang_harga` int(11) NOT NULL,
   `barang_created` datetime DEFAULT NULL,
   `barang_updated` datetime DEFAULT NULL,
@@ -43,15 +44,16 @@ CREATE TABLE `barang` (
 -- Dumping data for table `barang`
 --
 
-INSERT INTO `barang` (`barang_id`, `barang_transaksi`, `barang_nama`, `barang_pekerjaan`, `barang_qty`, `barang_harga`, `barang_created`, `barang_updated`, `barang_deleted`) VALUES
-(1, 1, 'mesin motor', 'bubut', 1, 12000, '2021-08-03 02:18:23', '2021-08-03 02:18:23', NULL),
-(2, 2, 'barang 1', 'pek 1', 3, 10000, '2021-08-03 02:39:18', '2021-08-03 02:39:18', NULL),
-(3, 2, 'barang 2', '[ek 3', 5, 12000, '2021-08-03 02:39:18', '2021-08-03 02:39:18', NULL),
-(4, 2, 'barang 3', 'pek 2', 7, 15000, '2021-08-03 02:39:18', '2021-08-03 02:39:18', NULL),
-(5, 3, 'brg1', 'haha3', 45, 76, '2021-08-03 02:41:43', '2021-08-03 02:41:43', NULL),
-(6, 3, 'brg4', 'hah2', 54, 761, '2021-08-03 02:41:43', '2021-08-03 02:41:43', NULL),
-(7, 4, 'fads', 'bubut', 543, 645, '2021-08-03 02:42:17', '2021-08-03 02:42:17', NULL),
-(8, 4, 'fdas', 'fasd', 534, 6457, '2021-08-03 02:42:17', '2021-08-03 02:42:17', NULL);
+INSERT INTO `barang` (`barang_id`, `barang_transaksi`, `barang_nama`, `barang_pekerjaan`, `barang_qty`, `barang_satuan`, `barang_harga`, `barang_created`, `barang_updated`, `barang_deleted`) VALUES
+(1, 1, 'mesin motor', 'bubut', 1, 1, 12000, '2021-08-03 02:18:23', '2021-08-03 02:18:23', NULL),
+(2, 2, 'barang 1', 'pek 1', 3, 2, 10000, '2021-08-03 02:39:18', '2021-08-03 02:39:18', NULL),
+(3, 2, 'barang 2', '[ek 3', 5, 3, 12000, '2021-08-03 02:39:18', '2021-08-03 02:39:18', NULL),
+(4, 2, 'barang 3', 'pek 2', 7, 4, 15000, '2021-08-03 02:39:18', '2021-08-03 02:39:18', NULL),
+(5, 3, 'brg1', 'haha3', 45, 5, 76, '2021-08-03 02:41:43', '2021-08-03 02:41:43', NULL),
+(6, 3, 'brg4', 'hah2', 54, 6, 761, '2021-08-03 02:41:43', '2021-08-03 02:41:43', NULL),
+(7, 4, 'fads', 'bubut', 543, 7, 645, '2021-08-03 02:42:17', '2021-08-03 02:42:17', NULL),
+(8, 4, 'fdas', 'fasd', 534, 8, 6457, '2021-08-03 02:42:17', '2021-08-03 02:42:17', NULL),
+(9, 3, 'brg41', 'hah2', 541, 2, 7612, '2021-08-03 02:41:43', '2021-08-03 02:41:43', NULL);
 
 -- --------------------------------------------------------
 
@@ -248,7 +250,7 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`users_id`, `users_name`, `users_password`, `users_salt`, `users_level`, `users_nohp`, `users_nama`, `users_foto`, `users_aktif`, `users_lastlogin`, `users_lastip`, `users_created`, `users_updated`, `users_deleted`) VALUES
-(1, 'admin', '$2y$10$C5/IGiJiSuXiLATaXKpbL.IqCpT66RmlbW4tjOGeOISAADNFGlmsW', '#MzLE4rb@0uKSGe27TJy)Qwds', 1, '+62856540126662', 'Edi Wahyu Widodo, S.ST, MT12', '6a5be3e71002b0c54e784da4dc0881cbd99a1238.jpg', 1, '2021-08-16 12:57:53', '172.16.238.1', '2021-03-09 07:52:51', '2021-08-16 12:57:53', NULL),
+(1, 'admin', '$2y$10$C5/IGiJiSuXiLATaXKpbL.IqCpT66RmlbW4tjOGeOISAADNFGlmsW', '#MzLE4rb@0uKSGe27TJy)Qwds', 1, '+62856540126662', 'Edi Wahyu Widodo, S.ST, MT12', '6a5be3e71002b0c54e784da4dc0881cbd99a1238.jpg', 1, '2021-08-19 13:15:36', '172.16.238.1', '2021-03-09 07:52:51', '2021-08-19 13:15:36', NULL),
 (2, 'bidan', '$2y$10$llDJi.O9rrJVHX6qM8HJ.ed0DbWtZZZMeDdLhJIdiVjZx4X0NY306', '', 3, '081297155586', 'Hardianty Amaliah', '6a5be3e71002b0c54e784da4dc0881cbd99a1238_1.jpg', 0, '2021-03-09 20:22:10', '172.16.238.1', '2021-03-09 20:21:57', '2021-03-25 08:06:55', NULL),
 (3, 'kominfo1', '$2y$10$aqOgVCud7OiS6qrvqLQNzO4oQE4LZ0KQBqf2YIgfD2/fpAQOaeFwa', 'jZ(*qw$6g4vd^fNa&~Ey!J5U+', 4, '+6285654012661', 'PT. Pama Persada1', '75b44b0e9c2e5d305fa323c6c51d3476_Generic_6.jpg', 1, NULL, NULL, '2021-07-24 08:08:26', '2021-07-24 08:09:44', '2021-07-24 08:09:44');
 
@@ -313,7 +315,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `barang`
 --
 ALTER TABLE `barang`
-  MODIFY `barang_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `barang_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `customer`

@@ -1,10 +1,22 @@
 <?= $this->extend('master/index') ?>
 
+<?= $this->section('css') ?>
+<link href="<?= base_url(); ?>/assets/plugins/select2/css/select2.min.css" rel="stylesheet">
+<?= $this->endSection() ?>
+
 <?= $this->section('js') ?>
 <script src="<?= base_url(); ?>/js/jquery.repeater.min.js"></script>
+<script src="<?= base_url(); ?>/assets/plugins/select2/js/select2.full.min.js"></script>
 <script>
     $(document).ready(function() {
-        $('.repeater').repeater();
+        $('.repeater').repeater({
+            isFirstItemUndeletable: true,
+            hide: function(deleteElement) {
+                $(this).slideUp(deleteElement);
+                console.log($(this).children().find("input[name*='id']").val());
+            },
+        });
+        $('.select2').select2();
     })
 </script>
 <?= $this->endSection() ?>
@@ -37,10 +49,10 @@
                             <div class="form-row">
                                 <div class="col-md-6 mb-3">
                                     <label for="validationCustom02">Customer</label>
-                                    <select name="customer" class="form-control" required>
+                                    <select name="customer" class="form-control select2" required>
                                         <option value="">Pilih Customer</option>
                                         <?php foreach ($customer as $c) : ?>
-                                            <option value="<?= $c->customer_id ?>"><?= $c->customer_nama ?></option>
+                                            <option value="<?= $c->customer_id ?>" <?= $item->transaksi_customer == $c->customer_id ? 'selected' : '' ?>><?= $c->customer_nama ?></option>
                                         <?php endforeach ?>
                                     </select>
                                     <div class="invalid-feedback">
@@ -49,51 +61,55 @@
                                 </div>
                             </div>
                             <div data-repeater-list="data">
-                                <div class="form-row" data-repeater-item>
-                                    <div class="col-md-3 mb-3">
-                                        <label for="validationCustom02">Nama Barang</label>
-                                        <input type="text" class="form-control" name="nama" placeholder="Nama Barang" value="<?= old('nama'); ?>" required>
-                                        <div class="invalid-feedback">
-                                            Looks good!
-                                        </div>
-                                    </div>
-                                    <div class="col-md-4 mb-3">
-                                        <label for="validationCustom02">Pekerjaan</label>
-                                        <input type="text" class="form-control" name="pekerjaan" placeholder="Nama Pekerjaan" value="<?= old('pekerjaan'); ?>" required>
-                                        <div class="invalid-feedback">
-                                            Looks good!
-                                        </div>
-                                    </div>
-                                    <div class="col-md-1 mb-3">
-                                        <label for="validationCustom02">QTY</label>
-                                        <input type="text" class="form-control" name="qty" placeholder="Qty" value="<?= old('qty'); ?>" required>
-                                        <div class="invalid-feedback">
-                                            Looks good!
-                                        </div>
-                                    </div>
-                                    <div class="col-md-1 mb-3">
-                                        <label for="validationCustom02">Satuan</label>
-                                        <select name="satuan" class="form-control" required>
-                                            <?php foreach ($satuan as $c) : ?>
-                                                <option value="<?= $c->satuan_id ?>"><?= $c->satuan_nama ?></option>
-                                            <?php endforeach ?>
-                                        </select>
-                                        <div class="invalid-feedback">
-                                            Looks good!
-                                        </div>
-                                    </div>
-                                    <div class="col-md-2 mb-3">
-                                        <label for="validationCustom02">Harga</label>
-                                        <input type="text" class="form-control" name="harga" placeholder="Harga" value="<?= old('harga'); ?>" required>
-                                        <div class="invalid-feedback">
-                                            Looks good!
-                                        </div>
-                                    </div>
-                                    <div class="col-md-1" style="margin-top: 30px;">
-                                        <button data-repeater-delete class="btn btn-danger" type="button"> Del </button>
-                                    </div>
-                                </div>
+                                <?php foreach ($barang as $k => $b) :
+                                ?>
 
+                                    <div class="form-row" data-repeater-item>
+                                        <div class="col-md-3 mb-3">
+                                            <label for="validationCustom02">Nama Barang</label>
+                                            <input type="text" class="form-control" name="nama" placeholder="Nama Barang" value="<?= $b->barang_nama; ?>" required>
+                                            <input type="hidden" name="id" value="<?= $b->barang_id; ?>" required>
+                                            <div class="invalid-feedback">
+                                                Looks good!
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4 mb-3">
+                                            <label for="validationCustom02">Pekerjaan</label>
+                                            <input type="text" class="form-control" name="pekerjaan" placeholder="Nama Pekerjaan" value="<?= $b->barang_pekerjaan; ?>" required>
+                                            <div class="invalid-feedback">
+                                                Looks good!
+                                            </div>
+                                        </div>
+                                        <div class="col-md-1 mb-3">
+                                            <label for="validationCustom02">QTY</label>
+                                            <input type="text" class="form-control" name="qty" placeholder="Qty" value="<?= $b->barang_qty; ?>" required>
+                                            <div class="invalid-feedback">
+                                                Looks good!
+                                            </div>
+                                        </div>
+                                        <div class="col-md-1 mb-3">
+                                            <label for="validationCustom02">Satuan</label>
+                                            <select name="satuan" class="form-control" required>
+                                                <?php foreach ($satuan as $c) : ?>
+                                                    <option value="<?= $c->satuan_id ?>" <?= $c->satuan_id == $b->barang_satuan ? 'selected' : '' ?>><?= $c->satuan_nama ?></option>
+                                                <?php endforeach ?>
+                                            </select>
+                                            <div class="invalid-feedback">
+                                                Looks good!
+                                            </div>
+                                        </div>
+                                        <div class="col-md-2 mb-3">
+                                            <label for="validationCustom02">Harga</label>
+                                            <input type="text" class="form-control" name="harga" placeholder="Harga" value="<?= $b->barang_harga; ?>" required>
+                                            <div class="invalid-feedback">
+                                                Looks good!
+                                            </div>
+                                        </div>
+                                        <div class="col-md-1" style="margin-top: 30px;">
+                                            <button data-repeater-delete class="btn btn-danger" type="button"> Del </button>
+                                        </div>
+                                    </div>
+                                <?php endforeach ?>
                             </div>
                             <button data-repeater-create class="btn btn-info" type="button">Tambah</button>
                             <button class="btn btn-secondary" type="reset">Reset</button>

@@ -1,10 +1,18 @@
 <?= $this->extend('master/index') ?>
 
+<?= $this->section('css') ?>
+<link href="<?= base_url(); ?>/assets/plugins/select2/css/select2.min.css" rel="stylesheet">
+<?= $this->endSection() ?>
+
 <?= $this->section('js') ?>
 <script src="<?= base_url(); ?>/js/jquery.repeater.min.js"></script>
+<script src="<?= base_url(); ?>/assets/plugins/select2/js/select2.full.min.js"></script>
 <script>
     $(document).ready(function() {
-        $('.repeater').repeater();
+        $('.repeater').repeater({
+            isFirstItemUndeletable: true,
+        });
+        $('.select2').select2();
     })
 </script>
 <?= $this->endSection() ?>
@@ -37,7 +45,7 @@
                             <div class="form-row">
                                 <div class="col-md-6 mb-3">
                                     <label for="validationCustom02">Customer</label>
-                                    <select name="customer" class="form-control" required>
+                                    <select name="customer" class="form-control select2" required>
                                         <option value="">Pilih Customer</option>
                                         <?php foreach ($customer as $c) : ?>
                                             <option value="<?= $c->customer_id ?>"><?= $c->customer_nama ?></option>
