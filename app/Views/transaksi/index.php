@@ -33,6 +33,10 @@
                     data: "barang_pekerjaan"
                 },
                 {
+                    data: "transaksi_total",
+                    render: $.fn.dataTable.render.number('.', ',', 0, '')
+                },
+                {
                     data: "transaksi_status"
                 },
                 {
@@ -40,24 +44,29 @@
                 }
             ],
             columnDefs: [{
-                targets: 4,
-                className: "text-center",
-                render: function(data, type, row, meta) {
-                    return `<span class="badge badge-pill badge-${status[data].warna}">${status[data].label}</span>`;
+                    targets: 4,
+                    className: 'text-right'
                 },
-            }, {
-                targets: 5,
-                className: "text-center",
-                render: function(data, type, row, meta) {
-                    var a = `<a href="<?= base_url('transaksi/proses') ?>/${row.transaksi_status}/${data}"><i class="fas fa-check text-success font-16 mr-3"></i></a>`;
-                    if (row.transaksi_status == 1 && level < 4) {
-                        a += `<a href="<?= base_url('transaksi/edit') ?>/${data}"><i class="fas fa-edit text-info font-16 mr-3"></i></a>`;
-                        a += `<a href="<?= base_url('transaksi/proses') ?>/-1/${data}" onclick="return confirm('are you sure ? ')"><i class="fas fa-times text-danger font-16"></i></a>`;
-                    }
+                {
+                    targets: 5,
+                    className: "text-center",
+                    render: function(data, type, row, meta) {
+                        return `<span class="badge badge-pill badge-${status[data].warna}">${status[data].label}</span>`;
+                    },
+                }, {
+                    targets: 6,
+                    className: "text-center",
+                    render: function(data, type, row, meta) {
+                        var a = `<a href="<?= base_url('transaksi/proses') ?>/${row.transaksi_status}/${data}"><i class="fas fa-check text-success font-16 mr-3"></i></a>`;
+                        if (row.transaksi_status == 1 && level < 4) {
+                            a += `<a href="<?= base_url('transaksi/edit') ?>/${data}"><i class="fas fa-edit text-info font-16 mr-3"></i></a>`;
+                            a += `<a href="<?= base_url('transaksi/proses') ?>/-1/${data}" onclick="return confirm('are you sure ? ')"><i class="fas fa-times text-danger font-16"></i></a>`;
+                        }
 
-                    return a;
+                        return a;
+                    },
                 },
-            }, ]
+            ]
         });
     })
 </script>
@@ -96,6 +105,7 @@
                                     <th>Nama Customer</th>
                                     <th>Last Update</th>
                                     <th>Pekerjaan</th>
+                                    <th>Total</th>
                                     <th>Status</th>
                                     <th>Action</th>
                                 </tr>

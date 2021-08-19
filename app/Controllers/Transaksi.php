@@ -144,21 +144,23 @@ class Transaksi extends BaseController {
 	}
 
 	public function update($id) {
-		$valid = $this->model->getOwnValidationRules();
-
-		if (!$this->validate($valid)) {
-			return redirect()
-				->to('/transaksi/edit/' . $id)
-				->withInput();
+		$barang = new Mbarang();
+		if ($this->request->getPost('deleted') != '') {
+			$delete_item = explode(',', $this->request->getPost('deleted'));
+			foreach ($delete_item as $d) {
+				$barang->delete(['barang_id' => $d]);
+			}
 		}
-
-
+		$barang->updateBatch($this->request->getPost('data'), 'barang_id');
+		$total = 0;
+		foreach ($this->request->getPost('data') as $d) {
+			$total = $total + ($d['barang_qty'] * $d['barang_harga']);
+		}
 		$data = [
 			'transaksi_id' => $id,
-			'transaksi_nama' => $this->request->getPost('nama'),
-			'transaksi_alamat' => $this->request->getPost('alamat'),
-			'transaksi_telp' => $this->request->getPost('telp'),
+			'transaksi_customer' => $this->request->getPost('customer'),
 			'transaksi_user' => session()->userid,
+			'transaksi_total' => $total,
 		];
 
 		$r = $this->model->save($data);

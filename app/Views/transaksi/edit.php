@@ -12,8 +12,12 @@
         $('.repeater').repeater({
             isFirstItemUndeletable: true,
             hide: function(deleteElement) {
+                let deleted = $("#deleted").val() != '' ? $("#deleted").val().split(',') : [];
+                deleted.push($(this).children().find("input[name*='id']").val());
+                $("#deleted").val(deleted.join(','));
                 $(this).slideUp(deleteElement);
-                console.log($(this).children().find("input[name*='id']").val());
+                // console.log($(this).children().find("input[name*='id']").val());
+
             },
         });
         $('.select2').select2();
@@ -45,7 +49,8 @@
                             </div>
                         <?php endif; ?>
                         <?= $validation->listErrors(); ?>
-                        <form method="post" action="<?= base_url('transaksi/save'); ?>" class="needs-validation repeater" novalidate>
+                        <form method="post" action="<?= base_url('transaksi/update/' . $item->transaksi_id); ?>" class="needs-validation repeater" novalidate>
+                            <input type="hidden" name="deleted" id="deleted" value="">
                             <div class="form-row">
                                 <div class="col-md-6 mb-3">
                                     <label for="validationCustom02">Customer</label>
@@ -67,29 +72,29 @@
                                     <div class="form-row" data-repeater-item>
                                         <div class="col-md-3 mb-3">
                                             <label for="validationCustom02">Nama Barang</label>
-                                            <input type="text" class="form-control" name="nama" placeholder="Nama Barang" value="<?= $b->barang_nama; ?>" required>
-                                            <input type="hidden" name="id" value="<?= $b->barang_id; ?>" required>
+                                            <input type="text" class="form-control" name="barang_nama" placeholder="Nama Barang" value="<?= $b->barang_nama; ?>" required>
+                                            <input type="hidden" name="barang_id" value="<?= $b->barang_id; ?>" required>
                                             <div class="invalid-feedback">
                                                 Looks good!
                                             </div>
                                         </div>
                                         <div class="col-md-4 mb-3">
                                             <label for="validationCustom02">Pekerjaan</label>
-                                            <input type="text" class="form-control" name="pekerjaan" placeholder="Nama Pekerjaan" value="<?= $b->barang_pekerjaan; ?>" required>
+                                            <input type="text" class="form-control" name="barang_pekerjaan" placeholder="Nama Pekerjaan" value="<?= $b->barang_pekerjaan; ?>" required>
                                             <div class="invalid-feedback">
                                                 Looks good!
                                             </div>
                                         </div>
                                         <div class="col-md-1 mb-3">
                                             <label for="validationCustom02">QTY</label>
-                                            <input type="text" class="form-control" name="qty" placeholder="Qty" value="<?= $b->barang_qty; ?>" required>
+                                            <input type="text" class="form-control" name="barang_qty" placeholder="Qty" value="<?= $b->barang_qty; ?>" required>
                                             <div class="invalid-feedback">
                                                 Looks good!
                                             </div>
                                         </div>
                                         <div class="col-md-1 mb-3">
                                             <label for="validationCustom02">Satuan</label>
-                                            <select name="satuan" class="form-control" required>
+                                            <select name="barang_satuan" class="form-control" required>
                                                 <?php foreach ($satuan as $c) : ?>
                                                     <option value="<?= $c->satuan_id ?>" <?= $c->satuan_id == $b->barang_satuan ? 'selected' : '' ?>><?= $c->satuan_nama ?></option>
                                                 <?php endforeach ?>
@@ -100,7 +105,7 @@
                                         </div>
                                         <div class="col-md-2 mb-3">
                                             <label for="validationCustom02">Harga</label>
-                                            <input type="text" class="form-control" name="harga" placeholder="Harga" value="<?= $b->barang_harga; ?>" required>
+                                            <input type="text" class="form-control" name="barang_harga" placeholder="Harga" value="<?= $b->barang_harga; ?>" required>
                                             <div class="invalid-feedback">
                                                 Looks good!
                                             </div>
@@ -111,7 +116,7 @@
                                     </div>
                                 <?php endforeach ?>
                             </div>
-                            <button data-repeater-create class="btn btn-info" type="button">Tambah</button>
+                            <!-- <button data-repeater-create class="btn btn-info" type="button">Tambah</button> -->
                             <button class="btn btn-secondary" type="reset">Reset</button>
                             <button class="btn btn-primary" type="submit">Simpan</button>
                         </form>
