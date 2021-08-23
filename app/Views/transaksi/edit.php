@@ -16,8 +16,6 @@
                 deleted.push($(this).children().find("input[name*='id']").val());
                 $("#deleted").val(deleted.join(','));
                 $(this).slideUp(deleteElement);
-                // console.log($(this).children().find("input[name*='id']").val());
-
             },
         });
         $('.select2').select2();
