@@ -58,6 +58,7 @@
                     className: "text-center",
                     render: function(data, type, row, meta) {
                         var a = `<a href="<?= base_url('transaksi/proses') ?>/${row.transaksi_status}/${data}"><i class="fas fa-check text-success font-16 mr-3"></i></a>`;
+                        a += `<a href="<?= base_url('transaksi/print') ?>/${data}"><i class="fas fa-print text-dark font-16 mr-3"></i></a>`
                         if (row.transaksi_status == 1 && level < 4) {
                             a += `<a href="<?= base_url('transaksi/edit') ?>/${data}"><i class="fas fa-edit text-info font-16 mr-3"></i></a>`;
                             a += `<a href="<?= base_url('transaksi/proses') ?>/-1/${data}" onclick="return confirm('are you sure ? ')"><i class="fas fa-times text-danger font-16"></i></a>`;

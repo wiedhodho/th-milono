@@ -143,6 +143,25 @@ class Transaksi extends BaseController {
 		return view($this->halaman . 'edit', $data);
 	}
 
+	public function print($id) {
+		$data['title'] = 'Edit Transaksi';
+		$logoPath = ROOTPATH . 'htdocs/img/logo.png';
+		$data['extension'] = pathinfo($logoPath, PATHINFO_EXTENSION);
+		$data['logo'] = base64_encode(file_get_contents($logoPath));
+		$data['validation'] = \Config\Services::validation();
+		$data['item'] = $this->model->join('customer', 'transaksi_customer=customer_id')->find($id);
+
+		$barang = new Mbarang();
+
+		$data['barang'] = $barang->join('satuan', 'barang_satuan=satuan_id')->where('barang_transaksi', $id)->findAll();
+
+		$dompdf = new \Dompdf\Dompdf();
+		$dompdf->loadHtml(view('transaksi/cetak', $data));
+		$dompdf->setPaper('A5', 'landscape');
+		$dompdf->render();
+		$dompdf->stream();
+	}
+
 	public function update($id) {
 		$barang = new Mbarang();
 		if ($this->request->getPost('deleted') != '') {
