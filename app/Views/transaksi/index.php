@@ -44,6 +44,12 @@
                 }
             ],
             columnDefs: [{
+                    targets: 3,
+                    render: function(data, type, row, meta) {
+                        return `<a href="#" onclick="barang(${row.transaksi_id})" style="color: #7d7d83">${data}</a>`;
+                    },
+                },
+                {
                     targets: 4,
                     className: 'text-right'
                 },
@@ -51,9 +57,10 @@
                     targets: 5,
                     className: "text-center",
                     render: function(data, type, row, meta) {
-                        return `<span class="badge badge-pill badge-${status[data].warna}">${status[data].label}</span>`;
+                        return `<a href="#" onclick="history(${row.transaksi_id})"><span class="badge badge-pill badge-${status[data].warna}">${status[data].label}</span></a>`;
                     },
-                }, {
+                },
+                {
                     targets: 6,
                     className: "text-center",
                     render: function(data, type, row, meta) {
@@ -70,6 +77,22 @@
             ]
         });
     })
+
+    function history(id) {
+        $.get('<?= base_url('history/detail') ?>/' + id, function(data) {
+            $('.modal-title').html('History Transaksi');
+            $('.modal-body').html(data);
+            $('#exampleModal').modal('show');
+        })
+    }
+
+    function barang(id) {
+        $.get('<?= base_url('barang/detail') ?>/' + id, function(data) {
+            $('.modal-title').html('Detail Barang');
+            $('.modal-body').html(data);
+            $('#exampleModal').modal('show');
+        })
+    }
 </script>
 <?= $this->endSection() ?>
 
@@ -116,6 +139,24 @@
                             </tbody>
                         </table>
                     </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">History Transaksi</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <i class="material-icons">close</i>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    Loading...
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-dismiss="modal">OK</button>
                 </div>
             </div>
         </div>
