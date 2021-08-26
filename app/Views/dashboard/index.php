@@ -117,8 +117,10 @@
             </ol>
         </nav>
         <div class="page-options">
-            <a href="<?= base_url('customer/add'); ?>" class="btn btn-info">Tambah Customer</a>
-            <a href="<?= base_url('transaksi/add'); ?>" class="btn btn-primary">Transaksi Baru</a>
+            <?php if (session()->level < 4) : ?>
+                <a href="<?= base_url('customer/add'); ?>" class="btn btn-info">Tambah Customer</a>
+                <a href="<?= base_url('transaksi/add'); ?>" class="btn btn-primary">Transaksi Baru</a>
+            <?php endif ?>
         </div>
     </div>
     <div class="main-wrapper">
@@ -167,7 +169,7 @@
             <div class="col-lg-4">
                 <div class="card top-products">
                     <div class="card-body">
-                        <h5 class="card-title">Transaksi Baru<span class="card-title-helper">Waktu</span></h5>
+                        <h5 class="card-title">Transaksi Baru<span class="card-title-helper">Barang</span></h5>
                         <div class="top-products-list">
                             <?php foreach ($last_trx as $l) : ?>
                                 <div class="product-item">

@@ -13,10 +13,6 @@
                     <span><?= session()->username; ?></span><i class="material-icons dropdown-icon">keyboard_arrow_down</i>
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <a class="dropdown-item" href="<?= base_url('permohonan/baru'); ?>">Ajukan Baru</a>
-                    <a class="dropdown-item" href="<?= base_url('permohonan/renew'); ?>">Ajukan Pembaruan</a>
-                    <a class="dropdown-item" href="<?= base_url('permohonan/pencabutan_baru'); ?>">Ajukan Pencabutan</a>
-                    <div class="dropdown-divider"></div>
                     <a class="dropdown-item" href="<?= base_url('users/profil'); ?>">My Profile</a>
                     <a class="dropdown-item" href="<?= base_url('auth/logout'); ?>">Log out</a>
                 </div>
@@ -27,13 +23,14 @@
         </ul>
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav">
-
-                <li class="nav-item">
-                    <a href="<?= base_url('users'); ?>" class="nav-link">Users</a>
-                </li>
-                <li class="nav-item">
-                    <a href="<?= base_url('reporting'); ?>" class="nav-link">Reports</a>
-                </li>
+                <?php if (session()->level < 4) : ?>
+                    <li class="nav-item">
+                        <a href="<?= base_url('users'); ?>" class="nav-link">Users</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="<?= base_url('reporting'); ?>" class="nav-link">Reports</a>
+                    </li>
+                <?php endif ?>
             </ul>
         </div>
         <div class="navbar-search">

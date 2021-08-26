@@ -20,34 +20,38 @@
                     <li>
                         <a href="<?= base_url('transaksi/status/3'); ?>">Selesai</a>
                     </li>
-                    <li>
-                        <a href="<?= base_url('transaksi/status/4'); ?>">Diambil</a>
-                    </li>
-                    <li>
-                        <a href="<?= base_url('transaksi/status/5'); ?>">Dibayar</a>
-                    </li>
-                    <li>
-                        <a href="<?= base_url('transaksi/status/0'); ?>">Batal</a>
-                    </li>
-                    <li>
-                        <a href="<?= base_url('transaksi'); ?>">List All</a>
-                    </li>
+                    <?php if (session()->level < 4) : ?>
+                        <li>
+                            <a href="<?= base_url('transaksi/status/4'); ?>">Diambil</a>
+                        </li>
+                        <li>
+                            <a href="<?= base_url('transaksi/status/5'); ?>">Dibayar</a>
+                        </li>
+                        <li>
+                            <a href="<?= base_url('transaksi/status/0'); ?>">Batal</a>
+                        </li>
+                        <li>
+                            <a href="<?= base_url('transaksi'); ?>">List All</a>
+                        </li>
+                    <?php endif ?>
                 </ul>
             </li>
-            <li>
-                <a href="#"><i class="material-icons">attach_money</i>Keuangan<i class="material-icons has-sub-menu">add</i></a>
-                <ul class="sub-menu">
-                    <li>
-                        <a href="<?= base_url('keuangan/add'); ?>">Tambah</a>
-                    </li>
-                    <li>
-                        <a href="<?= base_url('keuangan'); ?>">List</a>
-                    </li>
-                    <li>
-                        <a href="<?= base_url('keuangan/approved'); ?>">Approved</a>
-                    </li>
-                </ul>
-            </li>
+            <?php if (session()->level < 4) : ?>
+                <li>
+                    <a href="#"><i class="material-icons">attach_money</i>Keuangan<i class="material-icons has-sub-menu">add</i></a>
+                    <ul class="sub-menu">
+                        <li>
+                            <a href="<?= base_url('keuangan/add'); ?>">Tambah</a>
+                        </li>
+                        <li>
+                            <a href="<?= base_url('keuangan'); ?>">List</a>
+                        </li>
+                        <li>
+                            <a href="<?= base_url('keuangan/approved'); ?>">Approved</a>
+                        </li>
+                    </ul>
+                </li>
+            <?php endif ?>
             <li class="sidebar-title">
                 Manajemen
             </li>

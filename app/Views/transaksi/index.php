@@ -64,7 +64,12 @@
                     targets: 6,
                     className: "text-center",
                     render: function(data, type, row, meta) {
-                        var a = `<a href="<?= base_url('transaksi/proses') ?>/${row.transaksi_status}/${data}"><i class="fas fa-check text-success font-16 mr-3"></i></a>`;
+                        var a = '';
+                        <?php if (session()->level < 4 && $tahap == 3) { ?>
+                            a += `<a href="<?= base_url('transaksi/proses') ?>/${row.transaksi_status}/${data}"><i class="fas fa-check text-success font-16 mr-3"></i></a>`;
+                        <?php } else if (session()->level == 4 && $tahap < 3) { ?>
+                            a += `<a href="<?= base_url('transaksi/proses') ?>/${row.transaksi_status}/${data}"><i class="fas fa-check text-success font-16 mr-3"></i></a>`;
+                        <?php } ?>
                         a += `<a href="<?= base_url('transaksi/print') ?>/${data}"><i class="fas fa-print text-dark font-16 mr-3"></i></a>`
                         if (row.transaksi_status == 1 && level < 4) {
                             a += `<a href="<?= base_url('transaksi/edit') ?>/${data}"><i class="fas fa-edit text-info font-16 mr-3"></i></a>`;
@@ -105,9 +110,11 @@
                 <li class="breadcrumb-item active" aria-current="page"><?= $title; ?></li>
             </ol>
         </nav>
-        <div class="col text-right">
-            <a href="<?= base_url('transaksi/add'); ?>" class="btn btn-primary rounded-pill">Tambah</a>
-        </div>
+        <?php if (session()->level < 4) : ?>
+            <div class="col text-right">
+                <a href="<?= base_url('transaksi/add'); ?>" class="btn btn-primary rounded-pill">Tambah</a>
+            </div>
+        <?php endif ?>
     </div>
     <div class="main-wrapper">
 
