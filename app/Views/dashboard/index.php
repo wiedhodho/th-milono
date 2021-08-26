@@ -117,7 +117,7 @@
             </ol>
         </nav>
         <div class="page-options">
-            <a href="<?= base_url('customer/add'); ?>" class="btn btn-secondary">Tambah Customer</a>
+            <a href="<?= base_url('customer/add'); ?>" class="btn btn-info">Tambah Customer</a>
             <a href="<?= base_url('transaksi/add'); ?>" class="btn btn-primary">Transaksi Baru</a>
         </div>
     </div>
