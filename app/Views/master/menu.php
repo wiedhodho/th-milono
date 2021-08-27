@@ -1,5 +1,5 @@
 <div class="page-sidebar">
-    <div class="logo-box"><img src="<?= base_url('assets/images/logo.png') ?>" border="0" width="100px;" style="margin-top: -20px;"><a href="#" id="sidebar-close"><i class="material-icons">close</i></a> <a href="#" id="sidebar-state"><i class="material-icons">adjust</i><i class="material-icons compact-sidebar-icon">panorama_fish_eye</i></a></div>
+    <div class="logo-box"><img src="<?= base_url('img/logo.png') ?>" border="0" width="60px;" style="margin-top: -20px;"><a href="#" id="sidebar-close"><i class="material-icons">close</i></a> <a href="#" id="sidebar-state"><i class="material-icons">adjust</i><i class="material-icons compact-sidebar-icon">panorama_fish_eye</i></a></div>
     <div class="page-sidebar-inner slimscroll">
         <ul class="accordion-menu">
             <li class="sidebar-title">
