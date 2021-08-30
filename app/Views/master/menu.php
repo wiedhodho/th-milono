@@ -46,9 +46,9 @@
                         <li>
                             <a href="<?= base_url('keuangan'); ?>">List</a>
                         </li>
-                        <li>
+                        <!-- <li>
                             <a href="<?= base_url('keuangan/approved'); ?>">Approved</a>
-                        </li>
+                        </li> -->
                     </ul>
                 </li>
             <?php endif ?>

@@ -66,7 +66,6 @@
                                     <th>Tgl</th>
                                     <th class="text-right">Debet</th>
                                     <th class="text-right">Kredit</th>
-                                    <th>Status</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>
@@ -83,7 +82,6 @@
                                         <td><?= strftime('%d %b %Y %H:%M', strtotime($u->keuangan_created)); ?></td>
                                         <td class="text-right"><?php if ($u->keuangan_dk == 'D') echo number_format($u->keuangan_nominal); ?></td>
                                         <td class="text-right"><?php if ($u->keuangan_dk == 'K') echo number_format($u->keuangan_nominal); ?></td>
-                                        <td><?= $u->keuangan_approved != null ? strftime('%d %b %Y %H:%M', strtotime($u->keuangan_approved)) : '-'; ?></td>
                                         <td class="text-center">
                                             <a href="<?= base_url('keuangan/approve/' . $u->keuangan_id); ?>" class="mr-3 text-info"><i class="fa fa-check"></i></a>
                                             <a href="<?= base_url('keuangan/edit/' . $u->keuangan_id); ?>" class="mr-3 text-info"><i class="fa fa-edit"></i></a>

@@ -102,7 +102,7 @@ class Transaksi extends BaseController {
 		$data = [
 			'transaksi_customer' => $this->request->getPost('customer'),
 			'transaksi_user' => session()->userid,
-			'transaksi_status' => 0,
+			'transaksi_status' => 1,
 			'transaksi_total' => $total,
 		];
 
@@ -119,7 +119,7 @@ class Transaksi extends BaseController {
 			$hist->save([
 				'history_transaksi' => $last_id,
 				'history_user' => session()->userid,
-				'history_status' => 0,
+				'history_status' => 1,
 			]);
 			$this->notif('Transaksi Berhasil disimpan.');
 		} else {
