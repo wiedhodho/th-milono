@@ -66,7 +66,7 @@
                                     <th>Tgl</th>
                                     <th class="text-right">Debet</th>
                                     <th class="text-right">Kredit</th>
-                                    <th>Action</th>
+                                    <th width="10%">Action</th>
                                 </tr>
                             </thead>
                             <tbody>
