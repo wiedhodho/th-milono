@@ -1,4 +1,4 @@
--- phpMyAdmin SQL Dump data baru
+-- phpMyAdmin SQL Dump data baru ok
 -- version 5.0.4
 -- https://www.phpmyadmin.net/
 --
