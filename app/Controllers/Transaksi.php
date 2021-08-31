@@ -27,11 +27,6 @@ class Transaksi extends BaseController {
 		$def = new Definisi();
 		$data['status'] = json_encode($def->status());
 		$data['tahap'] = '';
-		// $data['transaksi'] = $this->model
-		// 	->select('transaksi_id,customer_nama, transaksi_updated, transaksi_status, (SELECT barang_pekerjaan FROM barang WHERE barang_transaksi=transaksi_id LIMIT 1) as barang_pekerjaan')
-		// 	->join('customer', 'transaksi_customer=customer_id')
-		// 	->orderBy('transaksi_updated', 'desc')
-		// 	->findAll();
 
 		$data['validation'] = \Config\Services::validation();
 		return view($this->halaman . 'index', $data);
@@ -96,7 +91,7 @@ class Transaksi extends BaseController {
 				'barang_harga' => $d['harga'],
 				'barang_satuan' => $d['satuan']
 			);
-			$total += $d['harga'];
+			$total += ($d['harga'] * $d['qty']);
 		}
 
 		$data = [
@@ -159,7 +154,7 @@ class Transaksi extends BaseController {
 		$dompdf->loadHtml(view('transaksi/cetak', $data));
 		$dompdf->setPaper('A5', 'landscape');
 		$dompdf->render();
-		$dompdf->stream();
+		$dompdf->stream('nota_' . $id . '.pdf');
 	}
 
 	public function update($id) {

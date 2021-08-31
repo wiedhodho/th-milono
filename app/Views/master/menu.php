@@ -36,7 +36,7 @@
                     <?php endif ?>
                 </ul>
             </li>
-            <?php if (session()->level < 4) : ?>
+            <?php if (session()->level < 3) : ?>
                 <li>
                     <a href="#"><i class="material-icons">attach_money</i>Keuangan<i class="material-icons has-sub-menu">add</i></a>
                     <ul class="sub-menu">
@@ -58,13 +58,19 @@
             <li>
                 <a href="<?= base_url('users/profil'); ?>"><i class="material-icons">account_circle</i>Profil</a>
             </li>
-            <?php if (session()->level == 1) : ?>
+            <?php if (session()->level < 3) : ?>
                 <li>
                     <a href="<?= base_url('users'); ?>"><i class="material-icons">manage_accounts</i>Users</a>
                 </li>
+            <?php
+            endif;
+            if (session()->level < 4) :
+            ?>
                 <li>
                     <a href="<?= base_url('customer'); ?>"><i class="material-icons">apps</i>Customer</a>
                 </li>
+            <?php endif;
+            if (session()->level < 3) : ?>
                 <li>
                     <a href="<?= base_url('settings'); ?>"><i class="material-icons">settings</i>Settings</a>
                 </li>

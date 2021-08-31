@@ -67,6 +67,8 @@
                         var a = '';
                         <?php if (session()->level < 4 && $tahap == 3) { ?>
                             a += `<a href="<?= base_url('transaksi/proses') ?>/${row.transaksi_status}/${data}"><i class="fas fa-check text-success font-16 mr-3"></i></a>`;
+                        <?php } else if (session()->level < 4 && $tahap == 4) { ?>
+                            a += `<a href="<?= base_url('transaksi/proses') ?>/${row.transaksi_status}/${data}" onclick="return confirm('Apakah Transaksi ini sudah dibayar?')"><i class="fas fa-check text-success font-16 mr-3"></i></a>`;
                         <?php } else if (session()->level == 4 && $tahap < 3) { ?>
                             a += `<a href="<?= base_url('transaksi/proses') ?>/${row.transaksi_status}/${data}"><i class="fas fa-check text-success font-16 mr-3"></i></a>`;
                         <?php } ?>
@@ -112,6 +114,9 @@
         </nav>
         <?php if (session()->level < 4) : ?>
             <div class="col text-right">
+                <?php if (session()->level < 3) : ?>
+                    <a href="<?= base_url('reporting/tagihan'); ?>" class="btn btn-info rounded-pill">Cetak Tagihan</a>
+                <?php endif ?>
                 <a href="<?= base_url('transaksi/add'); ?>" class="btn btn-primary rounded-pill">Tambah</a>
             </div>
         <?php endif ?>

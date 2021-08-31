@@ -23,7 +23,7 @@
         </ul>
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav">
-                <?php if (session()->level < 4) : ?>
+                <?php if (session()->level < 3) : ?>
                     <li class="nav-item">
                         <a href="<?= base_url('users'); ?>" class="nav-link">Users</a>
                     </li>
