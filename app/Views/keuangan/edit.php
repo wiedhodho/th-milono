@@ -61,6 +61,23 @@
                                     </div>
                                 </div>
                             </div>
+                            <div class="form-row">
+                                <div class="col-md-6 mb-3">
+                                    <label for="validationCustom01">Metode</label>
+                                    <div class="custom-control custom-radio">
+                                        <input class="custom-control-input" type="radio" name="transfer" id="transfer1" value="0" <?= $item->keuangan_transfer == '0' ? 'checked' : ''; ?> required>
+                                        <label class="custom-control-label" for="transfer1">
+                                            Cash
+                                        </label>
+                                    </div>
+                                    <div class="custom-control custom-radio">
+                                        <input class="custom-control-input" type="radio" name="transfer" id="transfer2" value="1" <?= $item->keuangan_transfer == '1' ? 'checked' : ''; ?> required>
+                                        <label class="custom-control-label" for="transfer2">
+                                            Transfer
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
                             <button class="btn btn-secondary" type="reset">Reset</button>
                             <button class="btn btn-primary" type="submit">Simpan</button>
                         </form>

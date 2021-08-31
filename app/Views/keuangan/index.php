@@ -11,6 +11,7 @@
 <script>
     $(document).ready(function() {
         $('#zero-conf').DataTable();
+        $('#zero-conf2').DataTable();
         $('#tgl2').datepicker({
             dateFormat: 'yy-mm-dd',
             onSelect: function(d, i) {
@@ -39,9 +40,17 @@
         <div class="row">
             <div class="col">
                 <div class="card">
+                    <div class="card-header">
+                        <ul class="nav nav-tabs card-header-tabs">
+                            <li class="nav-item">
+                                <a class="nav-link active" href="#cash" data-toggle="tab">Cash</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#transfer" data-toggle="tab">Transfer</a>
+                            </li>
+                        </ul>
+                    </div>
                     <div class="card-body">
-                        <h5 class="card-title">List Keuangan</h5>
-                        <p>Berikut adalah daftar seluruh keuangan yang ada pada system ini.</p>
                         <?php if (session()->getFlashdata('tipe')) : ?>
                             <div class="alert alert-<?= session()->getFlashdata('tipe') ?> outline-alert" role="alert">
                                 <?= session()->getFlashdata('pesan') ?>
@@ -58,39 +67,85 @@
                                 </div>
                             </div>
                         </form>
-                        <table id="zero-conf" class="display" style="width:100%">
-                            <thead>
-                                <tr>
-                                    <th>No</th>
-                                    <th>Keterangan</th>
-                                    <th>Tgl</th>
-                                    <th class="text-right">Debet</th>
-                                    <th class="text-right">Kredit</th>
-                                    <th width="10%">Action</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <?php $nomor = 1;
-                                $total_kredit = 0;
-                                $total_debet = 0;
-                                foreach ($keuangan as $u) :
-                                    $u->keuangan_dk == 'D' ? $total_debet += $u->keuangan_nominal : $total_kredit += $u->keuangan_nominal;
-                                ?>
-                                    <tr>
-                                        <td><?= $nomor++; ?></td>
-                                        <td><?= $u->keuangan_keterangan; ?></td>
-                                        <td><?= strftime('%d %b %Y %H:%M', strtotime($u->keuangan_created)); ?></td>
-                                        <td class="text-right"><?php if ($u->keuangan_dk == 'D') echo number_format($u->keuangan_nominal); ?></td>
-                                        <td class="text-right"><?php if ($u->keuangan_dk == 'K') echo number_format($u->keuangan_nominal); ?></td>
-                                        <td class="text-center">
-                                            <a href="<?= base_url('keuangan/approve/' . $u->keuangan_id); ?>" class="mr-3 text-info"><i class="fa fa-check"></i></a>
-                                            <a href="<?= base_url('keuangan/edit/' . $u->keuangan_id); ?>" class="mr-3 text-info"><i class="fa fa-edit"></i></a>
-                                            <a href="<?= base_url('keuangan/delete/' . $u->keuangan_id); ?>" class="text-danger" onclick="return confirm('are you sure?')"><i class="fas fa-trash"></i></a>
-                                        </td>
-                                    </tr>
-                                <?php endforeach; ?>
-                            </tbody>
-                        </table>
+                        <div class="tab-content">
+                            <div role="tabpanel" class="tab-pane active" id="cash">
+                                <table id="zero-conf" class="display" style="width:100%">
+                                    <thead>
+                                        <tr>
+                                            <th>No</th>
+                                            <th>Keterangan</th>
+                                            <th>Tgl</th>
+                                            <th class="text-right">Debet</th>
+                                            <th class="text-right">Kredit</th>
+                                            <th width="10%">Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <?php $nomor = 1;
+                                        $total_kredit = 0;
+                                        $total_debet = 0;
+                                        foreach ($keuangan as $u) :
+                                            if ($u->keuangan_transfer == '0') {
+                                                $u->keuangan_dk == 'D' ? $total_debet += $u->keuangan_nominal : $total_kredit += $u->keuangan_nominal;
+                                        ?>
+                                                <tr>
+                                                    <td><?= $nomor++; ?></td>
+                                                    <td><?= $u->keuangan_keterangan; ?></td>
+                                                    <td><?= strftime('%d %b %Y %H:%M', strtotime($u->keuangan_created)); ?></td>
+                                                    <td class="text-right"><?php if ($u->keuangan_dk == 'D') echo number_format($u->keuangan_nominal); ?></td>
+                                                    <td class="text-right"><?php if ($u->keuangan_dk == 'K') echo number_format($u->keuangan_nominal); ?></td>
+                                                    <td class="text-center">
+                                                        <?php if (date('Y-m-d') == strftime('%Y-%m-%d', strtotime($u->keuangan_created))) : ?>
+                                                            <a href="<?= base_url('keuangan/edit/' . $u->keuangan_id); ?>" class="mr-3 text-info"><i class="fa fa-edit"></i></a>
+                                                            <a href="<?= base_url('keuangan/delete/' . $u->keuangan_id); ?>" class="text-danger" onclick="return confirm('are you sure?')"><i class="fas fa-trash"></i></a>
+                                                        <?php endif ?>
+                                                    </td>
+                                                </tr>
+                                        <?php }
+                                        endforeach; ?>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div role="tabpanel" class="tab-pane" id="transfer">
+                                <table id="zero-conf2" class="display" style="width:100%">
+                                    <thead>
+                                        <tr>
+                                            <th>No</th>
+                                            <th>Keterangan</th>
+                                            <th>Tgl</th>
+                                            <th class="text-right">Debet</th>
+                                            <th class="text-right">Kredit</th>
+                                            <th width="10%">Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <?php $nomor = 1;
+                                        $total_kredit = 0;
+                                        $total_debet = 0;
+                                        foreach ($keuangan as $u) :
+                                            if ($u->keuangan_transfer == '1') {
+                                                $u->keuangan_dk == 'D' ? $total_debet += $u->keuangan_nominal : $total_kredit += $u->keuangan_nominal;
+                                        ?>
+                                                <tr>
+                                                    <td><?= $nomor++; ?></td>
+                                                    <td><?= $u->keuangan_keterangan; ?></td>
+                                                    <td><?= strftime('%d %b %Y %H:%M', strtotime($u->keuangan_created)); ?></td>
+                                                    <td class="text-right"><?php if ($u->keuangan_dk == 'D') echo number_format($u->keuangan_nominal); ?></td>
+                                                    <td class="text-right"><?php if ($u->keuangan_dk == 'K') echo number_format($u->keuangan_nominal); ?></td>
+                                                    <td class="text-center">
+                                                        <?php if (date('Y-m-d') == strftime('%Y-%b-%d', strtotime($u->keuangan_created))) : ?>
+                                                            <a href="<?= base_url('keuangan/edit/' . $u->keuangan_id); ?>" class="mr-3 text-info"><i class="fa fa-edit"></i></a>
+                                                            <a href="<?= base_url('keuangan/delete/' . $u->keuangan_id); ?>" class="text-danger" onclick="return confirm('are you sure?')"><i class="fas fa-trash"></i></a>
+                                                        <?php endif ?>
+                                                    </td>
+                                                </tr>
+                                        <?php }
+                                        endforeach; ?>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
                         <h5 class="card-title mt-5">Total Debet : <?= number_format($total_debet) ?></h5>
                         <h5 class="card-title mt-2">Total Kredit : <?= number_format($total_kredit) ?></h5>
                         <h5 class="card-title mt-2">Total (Kredit-Debet) : <?= number_format($total_kredit - $total_debet) ?></h5>

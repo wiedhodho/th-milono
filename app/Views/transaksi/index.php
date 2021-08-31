@@ -117,7 +117,6 @@
         <?php endif ?>
     </div>
     <div class="main-wrapper">
-
         <div class="row">
             <div class="col">
                 <div class="card">

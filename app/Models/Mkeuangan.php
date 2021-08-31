@@ -13,6 +13,7 @@ class Mkeuangan extends Model {
 
 	protected $allowedFields = [
 		'keuangan_dk',
+		'keuangan_transfer',
 		'keuangan_nominal',
 		'keuangan_keterangan',
 		'keuangan_user',
@@ -27,8 +28,9 @@ class Mkeuangan extends Model {
 
 	protected $validationRules = [
 		'keuangan_dk' => 'required',
+		'keuangan_transfer' => 'required',
 		'keuangan_nominal' => 'required|decimal',
-		'keuangan_keterangan' => 'required|min_length[5]',
+		'keuangan_keterangan' => 'required|min_length[3]',
 	];
 
 	public function getOwnValidationRules() {

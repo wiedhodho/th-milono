@@ -63,6 +63,7 @@ class Keuangan extends BaseController {
 		$data = [
 			'keuangan_keterangan' => $this->request->getPost('keterangan'),
 			'keuangan_dk' => $this->request->getPost('dk'),
+			'keuangan_transfer' => $this->request->getPost('transfer'),
 			'keuangan_nominal' => $this->request->getPost('nominal'),
 			'keuangan_user' => session()->userid,
 		];
@@ -97,6 +98,7 @@ class Keuangan extends BaseController {
 		$data = [
 			'keuangan_id' => $id,
 			'keuangan_dk' => $this->request->getPost('dk'),
+			'keuangan_transfer' => $this->request->getPost('transfer'),
 			'keuangan_keterangan' => $this->request->getPost('keterangan'),
 			'keuangan_nominal' => $this->request->getPost('nominal'),
 			'keuangan_user' => session()->userid,
