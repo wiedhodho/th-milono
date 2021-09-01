@@ -41,6 +41,29 @@
                         <form method="post" action="<?= base_url('reporting/download/'); ?>" class="needs-validation" novalidate>
                             <div class="form-row">
                                 <div class="col-md-6 mb-3">
+                                    <label for="validationCustom01">Metode</label>
+                                    <div class="custom-control custom-radio">
+                                        <input class="custom-control-input" type="radio" name="transfer" id="transfer11" value="-1" <?= old('transfer') == '-1' ? 'checked' : ''; ?> required>
+                                        <label class="custom-control-label" for="transfer11">
+                                            Semua
+                                        </label>
+                                    </div>
+                                    <div class="custom-control custom-radio">
+                                        <input class="custom-control-input" type="radio" name="transfer" id="transfer1" value="0" <?= old('transfer') == '0' ? 'checked' : ''; ?> required>
+                                        <label class="custom-control-label" for="transfer1">
+                                            Cash
+                                        </label>
+                                    </div>
+                                    <div class="custom-control custom-radio">
+                                        <input class="custom-control-input" type="radio" name="transfer" id="transfer2" value="1" <?= old('transfer') == '1' ? 'checked' : ''; ?> required>
+                                        <label class="custom-control-label" for="transfer2">
+                                            Transfer
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="col-md-6 mb-3">
                                     <label for="validationCustom02">Mulai</label>
                                     <input type="text" class="form-control tanggal" name="mulai" placeholder="mulai" value="<?= $thn . '-' . $bln . '-01'; ?>" required>
                                     <div class="invalid-feedback">

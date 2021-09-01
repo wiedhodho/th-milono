@@ -133,7 +133,7 @@
                                                     <td class="text-right"><?php if ($u->keuangan_dk == 'D') echo number_format($u->keuangan_nominal); ?></td>
                                                     <td class="text-right"><?php if ($u->keuangan_dk == 'K') echo number_format($u->keuangan_nominal); ?></td>
                                                     <td class="text-center">
-                                                        <?php if (date('Y-m-d') == strftime('%Y-%b-%d', strtotime($u->keuangan_created))) : ?>
+                                                        <?php if (date('Y-m-d') == strftime('%Y-%m-%d', strtotime($u->keuangan_created))) : ?>
                                                             <a href="<?= base_url('keuangan/edit/' . $u->keuangan_id); ?>" class="mr-3 text-info"><i class="fa fa-edit"></i></a>
                                                             <a href="<?= base_url('keuangan/delete/' . $u->keuangan_id); ?>" class="text-danger" onclick="return confirm('are you sure?')"><i class="fas fa-trash"></i></a>
                                                         <?php endif ?>

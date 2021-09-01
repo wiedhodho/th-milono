@@ -53,10 +53,13 @@ class Reporting extends BaseController {
 		$keuangan = new Mkeuangan();
 		$data['mulai'] = $this->request->getPost('mulai');
 		$data['selesai'] = $this->request->getPost('selesai');
-		$data['keuangan'] = $keuangan
+		$keuangan
 			->where('keuangan_created >=', $this->request->getPost('mulai'))
-			->where('keuangan_created <=', $this->request->getPost('selesai'))
-			->findAll();
+			->where('keuangan_created <=', $this->request->getPost('selesai'));
+		if ($this->request->getPost('transfer') != -1) {
+			$keuangan->where('keuangan_transfer', $this->request->getPost('transfer'));
+		}
+		$data['keuangan'] = $keuangan->findAll();
 		$dompdf = new \Dompdf\Dompdf();
 		$dompdf->loadHtml(view($this->halaman . 'cetak', $data));
 		$dompdf->setPaper('A4');

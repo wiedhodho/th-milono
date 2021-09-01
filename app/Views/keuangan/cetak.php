@@ -105,6 +105,7 @@
             <tr style="background-color: #eeeeee;">
                 <th>No</th>
                 <th>Keterangan</th>
+                <th>Transfer</th>
                 <th>Tgl</th>
                 <th class="text-right">Debet</th>
                 <th class="text-right">Kredit</th>
@@ -120,13 +121,14 @@
                 <tr>
                     <td><?= $nomor++; ?></td>
                     <td><?= $u->keuangan_keterangan; ?></td>
+                    <td><?= $u->keuangan_transfer == '1' ? 'Transfer' : ''; ?></td>
                     <td><?= strftime('%d %b %Y', strtotime($u->keuangan_created)); ?></td>
                     <td class="text-right"><?php if ($u->keuangan_dk == 'D') echo number_format($u->keuangan_nominal); ?></td>
                     <td class="text-right"><?php if ($u->keuangan_dk == 'K') echo number_format($u->keuangan_nominal); ?></td>
                 </tr>
             <?php endforeach; ?>
             <tr class="bold">
-                <td class="text-center" colspan="3">TOTAL</td>
+                <td class="text-center" colspan="4">TOTAL</td>
                 <td class="text-right"><?= number_format($total_debet) ?></td>
                 <td class="text-right"><?= number_format($total_kredit) ?></td>
             </tr>
