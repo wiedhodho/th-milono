@@ -13,6 +13,7 @@ class Mtransaksi extends Model {
 
 	protected $allowedFields = [
 		'transaksi_customer',
+		'transaksi_keterangan',
 		'transaksi_user',
 		'transaksi_status',
 		'transaksi_total',

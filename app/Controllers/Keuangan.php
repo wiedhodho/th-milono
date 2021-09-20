@@ -6,6 +6,8 @@ use App\Controllers\BaseController;
 use CodeIgniter\I18n\Time;
 
 use App\Models\Mkeuangan;
+use App\Models\Mtransaksi;
+use App\Models\Mhistory;
 
 class Keuangan extends BaseController {
 	protected $halaman = 'keuangan/';
@@ -75,6 +77,35 @@ class Keuangan extends BaseController {
 			$this->notif('Keuangan Gagal disimpan.', 'error');
 		}
 		return redirect()->to('/keuangan');
+	}
+
+	public function bayar($trx_id, $transfer) {
+		$trx = new Mtransaksi();
+		$tr = $trx->join('customer', 'transaksi_customer=customer_id')->find($trx_id);
+		$keterangan = 'Pembayaran Nota No. ' . $trx_id . ' an. ' . $tr->customer_nama;
+		$data = [
+			'keuangan_keterangan' => $keterangan,
+			'keuangan_dk' => 'K',
+			'keuangan_transfer' => $transfer,
+			'keuangan_nominal' => $tr->transaksi_total,
+			'keuangan_user' => session()->userid,
+		];
+
+		$r = $this->model->save($data);
+		if ($r) {
+			$hist = new Mhistory();
+			$hist->save([
+				'history_transaksi' => $trx_id,
+				'history_user' => session()->userid,
+				'history_status' => 5,
+			]);
+			$trx->set('transaksi_status', 5);
+			$trx->update($trx_id);
+			$this->notif('Keuangan Berhasil disimpan.');
+		} else {
+			$this->notif('Keuangan Gagal disimpan.', 'error');
+		}
+		return redirect()->to('/transaksi/status/4');
 	}
 
 	public function edit($id) {

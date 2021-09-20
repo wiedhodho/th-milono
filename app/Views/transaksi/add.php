@@ -56,6 +56,15 @@
                                     </div>
                                 </div>
                             </div>
+                            <div class="form-row">
+                                <div class="col-md-6 mb-3">
+                                    <label for="validationCustom02">Keterangan</label>
+                                    <input type="text" class="form-control" name="keterangan" placeholder="Keterangan" value="<?= old('keterangan'); ?>">
+                                    <div class="invalid-feedback">
+                                        Looks good!
+                                    </div>
+                                </div>
+                            </div>
                             <div data-repeater-list="data">
                                 <div class="form-row" data-repeater-item>
                                     <div class="col-md-3 mb-3">

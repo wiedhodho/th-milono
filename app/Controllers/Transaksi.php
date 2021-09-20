@@ -96,6 +96,7 @@ class Transaksi extends BaseController {
 
 		$data = [
 			'transaksi_customer' => $this->request->getPost('customer'),
+			'transaksi_keterangan' => $this->request->getPost('keterangan'),
 			'transaksi_user' => session()->userid,
 			'transaksi_status' => 1,
 			'transaksi_total' => $total,
@@ -173,6 +174,7 @@ class Transaksi extends BaseController {
 		$data = [
 			'transaksi_id' => $id,
 			'transaksi_customer' => $this->request->getPost('customer'),
+			'transaksi_keterangan' => $this->request->getPost('keterangan'),
 			'transaksi_user' => session()->userid,
 			'transaksi_total' => $total,
 		];

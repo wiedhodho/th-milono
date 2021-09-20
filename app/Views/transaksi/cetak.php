@@ -179,6 +179,13 @@
             </tr>
         </tbody>
     </table>
+    <?php
+    if ($item->transaksi_keterangan != '') : ?>
+        <b>Note:</b><br />
+        <i><?= $item->transaksi_keterangan ?></i>
+        <br />
+        <br />
+    <?php endif ?>
     <table class="table">
         <tr>
             <td width="30%" class="text-center" style="border-bottom: 1px solid #555555;">

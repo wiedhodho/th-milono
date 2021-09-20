@@ -63,6 +63,15 @@
                                     </div>
                                 </div>
                             </div>
+                            <div class="form-row">
+                                <div class="col-md-6 mb-3">
+                                    <label for="validationCustom02">Keterangan</label>
+                                    <input type="text" class="form-control" name="keterangan" placeholder="Keterangan" value="<?= $item->transaksi_keterangan; ?>">
+                                    <div class="invalid-feedback">
+                                        Looks good!
+                                    </div>
+                                </div>
+                            </div>
                             <div data-repeater-list="data">
                                 <?php foreach ($barang as $k => $b) :
                                 ?>

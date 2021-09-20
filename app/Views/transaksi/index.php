@@ -10,7 +10,8 @@
     $(document).ready(function() {
         "use strict";
         let status = JSON.parse(JSON.stringify(<?= $status ?>));
-        let level = <?= session()->level ?>
+        let level = <?= session()->level ?>;
+        let trx_id = 'null';
 
         $('#zero-conf').DataTable({
             ordering: true,
@@ -68,7 +69,7 @@
                         <?php if (session()->level < 4 && $tahap == 3) { ?>
                             a += `<a href="<?= base_url('transaksi/proses') ?>/${row.transaksi_status}/${data}"><i class="fas fa-check text-success font-16 mr-3"></i></a>`;
                         <?php } else if (session()->level < 4 && $tahap == 4) { ?>
-                            a += `<a href="<?= base_url('transaksi/proses') ?>/${row.transaksi_status}/${data}" onclick="return confirm('Apakah Transaksi ini sudah dibayar?')"><i class="fas fa-check text-success font-16 mr-3"></i></a>`;
+                            a += `<a href="<?= base_url('transaksi/proses') ?>/${row.transaksi_status}/${data}" onclick="modal_bayar(event, ${data})"><i class="fas fa-check text-success font-16 mr-3"></i></a>`;
                         <?php } else if (session()->level == 4 && $tahap < 3) { ?>
                             a += `<a href="<?= base_url('transaksi/proses') ?>/${row.transaksi_status}/${data}"><i class="fas fa-check text-success font-16 mr-3"></i></a>`;
                         <?php } ?>
@@ -99,6 +100,16 @@
             $('.modal-body').html(data);
             $('#exampleModal').modal('show');
         })
+    }
+
+    function modal_bayar(event, id) {
+        event.preventDefault();
+        trx_id = id;
+        $('#bayar_modal').modal('show');
+    }
+
+    function bayar(metode) {
+        location.href = '<?= base_url() ?>' + '/keuangan/bayar/' + trx_id + '/' + metode;
     }
 </script>
 <?= $this->endSection() ?>
@@ -168,6 +179,28 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-primary" data-dismiss="modal">OK</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="bayar_modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Pembayaran</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <i class="material-icons">close</i>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    Apakah Transaksi Ini sudah Dibayar ?
+                    <div class="form-row mt-3">
+                        <a href="#" onclick="bayar('0')" class="btn btn-success mr-2">Cash</a>
+                        <a href="#" onclick="bayar('1')" class="btn btn-warning">Transfer</a>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-outline-dark" data-dismiss="modal">Tutup</button>
                 </div>
             </div>
         </div>

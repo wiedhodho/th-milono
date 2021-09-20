@@ -105,6 +105,9 @@
                                         endforeach; ?>
                                     </tbody>
                                 </table>
+                                <h5 class="card-title mt-5">Total Debet : <?= number_format($total_debet) ?></h5>
+                                <h5 class="card-title mt-2">Total Kredit : <?= number_format($total_kredit) ?></h5>
+                                <h5 class="card-title mt-2">Total (Kredit-Debet) : <?= number_format($total_kredit - $total_debet) ?></h5>
                             </div>
                             <div role="tabpanel" class="tab-pane" id="transfer">
                                 <table id="zero-conf2" class="display" style="width:100%">
@@ -120,11 +123,11 @@
                                     </thead>
                                     <tbody>
                                         <?php $nomor = 1;
-                                        $total_kredit = 0;
-                                        $total_debet = 0;
+                                        $total_kredit_t = 0;
+                                        $total_debet_t = 0;
                                         foreach ($keuangan as $u) :
                                             if ($u->keuangan_transfer == '1') {
-                                                $u->keuangan_dk == 'D' ? $total_debet += $u->keuangan_nominal : $total_kredit += $u->keuangan_nominal;
+                                                $u->keuangan_dk == 'D' ? $total_debet_t += $u->keuangan_nominal : $total_kredit_t += $u->keuangan_nominal;
                                         ?>
                                                 <tr>
                                                     <td><?= $nomor++; ?></td>
@@ -143,12 +146,11 @@
                                         endforeach; ?>
                                     </tbody>
                                 </table>
+                                <h5 class="card-title mt-5">Total Debet : <?= number_format($total_debet_t) ?></h5>
+                                <h5 class="card-title mt-2">Total Kredit : <?= number_format($total_kredit_t) ?></h5>
+                                <h5 class="card-title mt-2">Total (Kredit-Debet) : <?= number_format($total_kredit_t - $total_debet_t) ?></h5>
                             </div>
                         </div>
-
-                        <h5 class="card-title mt-5">Total Debet : <?= number_format($total_debet) ?></h5>
-                        <h5 class="card-title mt-2">Total Kredit : <?= number_format($total_kredit) ?></h5>
-                        <h5 class="card-title mt-2">Total (Kredit-Debet) : <?= number_format($total_kredit - $total_debet) ?></h5>
                     </div>
                 </div>
             </div>
