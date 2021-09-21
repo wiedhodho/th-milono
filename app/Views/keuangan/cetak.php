@@ -106,7 +106,7 @@
                 <th>No</th>
                 <th>Keterangan</th>
                 <th>Transfer</th>
-                <th style="width:19%">Tanggal</th>
+                <th style="width:20%">Tanggal</th>
                 <th class="text-right">Debet</th>
                 <th class="text-right">Kredit</th>
             </tr>
