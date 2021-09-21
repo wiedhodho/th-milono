@@ -103,8 +103,8 @@
     <table class="table table-bordered">
         <thead>
             <tr style="background-color: #eeeeee;">
-                <th>No</th>
-                <th>Keterangan</th>
+                <th style="width:5%">No</th>
+                <th style="width:50%">Keterangan</th>
                 <th>Transfer</th>
                 <th style="width:20%">Tanggal</th>
                 <th class="text-right">Debet</th>
