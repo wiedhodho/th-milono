@@ -106,7 +106,7 @@
                 <th>No</th>
                 <th>Keterangan</th>
                 <th>Transfer</th>
-                <th width="18%">Tgl</th>
+                <th width="17%">Tgl</th>
                 <th width="20%" class="text-right">Debet</th>
                 <th width="20%" class="text-right">Kredit</th>
             </tr>
